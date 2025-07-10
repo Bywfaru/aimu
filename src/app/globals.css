@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-1: #CFE3D8;
+  --color-primary-2: #BCD0C3;
+  --color-primary-3: #6A8772;
+  --color-accent-1: #E6D7D4;
+  --color-accent-2: #C6BAAC;
+  --color-accent-3: #E9ECEE;
+  --color-text-light: #F8F9FA;
+  --color-google-star: #FFBB29;
+  --font-brolian: var(--font-brolian);
+  --font-amandine: var(--font-amandine);
+  --font-dinPro: var(--font-dinPro);
+}
+
+button {
+  @apply cursor-pointer;
+}
+
+body {
+  font-family: var(--font-dinPro), serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-brolian), serif;
+}

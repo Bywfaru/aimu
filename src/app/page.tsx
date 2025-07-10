@@ -1,0 +1,158 @@
+import { Button } from '@/components';
+import {
+  HeroSection,
+  ParagraphImageSection,
+  ParagraphSection,
+  ServicesSection,
+} from '@/components/pageComponents/homePage';
+import clsx from 'clsx';
+import Link from 'next/link';
+import type { FC } from 'react';
+
+const HomePage: FC = () => {
+  return (
+    <main>
+      <HeroSection />
+      <ParagraphSection
+        content={
+          <div
+            className={clsx([
+              'text-center',
+              'flex',
+              'flex-col',
+              'gap-5',
+              'text-primary-3',
+              'max-w-2xl',
+              'mx-auto',
+            ])}
+          >
+            <p>
+              We believe in the power of community and support. Through our
+              services and workshops, we aim to foster a network of women who
+              prioritize self-care and healing.
+            </p>
+
+            <p>
+              By taking care of your body, you can better take care of your
+              little one.
+            </p>
+          </div>
+        }
+      />
+      <ParagraphImageSection
+        image="/images/pexels-kpaukshtite-3242264.jpg"
+        title="Our Mission & Values"
+        content={
+          <p className="text-justify">
+            To empower new moms in Vancouver and beyond through personalized
+            belly binding services, custom beauty products, and education on
+            natural postpartum recovery. We strive to create business
+            opportunities for independent women, foster a supportive community,
+            and raise awareness about the importance of early postpartum
+            recovery to prevent complications, making recovery painless and
+            efficient for every mom.
+          </p>
+        }
+      />
+      <ServicesSection
+        title="Services & Treatments"
+        content={
+          <div
+            className={clsx([
+              'text-center',
+              'lg:text-justify',
+              'flex',
+              'flex-col',
+              'gap-5',
+            ])}
+          >
+            <p>
+              We offer free consultations and assessments to discuss your needs
+              before you commit to a treatment plan. You can even reserve your
+              spot as early as pregnancy confirmation, giving you peace of mind
+              that you’ll be taken care of when the time comes.
+            </p>
+            <p>
+              We also host seminars and workshops to educate moms on the
+              benefits of postpartum recovery and even offer training for those
+              looking to start a career in belly binding.
+            </p>
+          </div>
+        }
+        services={[
+          {
+            name: 'BELLY BINDING (10-DAY POSTPARTUM PROGRAM)',
+            href: '/booking',
+            image: '/images/belly_binding.jpeg',
+          },
+          {
+            name: 'STRETCH MARK REDUCTION & DETOX MASSAGE',
+            href: '/booking',
+            image: '/images/pexels-yankrukov-5793990.jpg',
+          },
+          {
+            name: 'PELVIC & PUBIC BONE RECOVERY',
+            href: '/booking',
+            image: '/images/pexels-cottonbro-6542718.jpg',
+          },
+          {
+            name: 'MAGNETIC WAND THERAPY',
+            href: '/booking',
+            image: '/images/magnetic_wand.jpeg',
+          },
+          {
+            name: 'PREGNANCY MASSAGE',
+            href: '/booking',
+            image: '/images/pexels-jonathanborba-19666196.jpg',
+          },
+          {
+            name: 'LACTATION CONSULTATION',
+            href: '/booking',
+            image: '/images/pexels-sarah-chai-7282910.jpg',
+          },
+        ]}
+      />
+      <ParagraphSection
+        title={
+          <span className={clsx(['w-full', 'lg:text-center', 'block'])}>
+            Why Choose Us?
+          </span>
+        }
+        content={
+          <div
+            className={clsx([
+              'max-w-2xl',
+              'mx-auto',
+              'flex',
+              'flex-col',
+              'gap-5',
+              'lg:items-center',
+            ])}
+          >
+            <p>
+              At Aimu, we personalize every treatment to suit your specific
+              needs. After assessing your postpartum condition, we craft a plan
+              that targets your areas of concern, ensuring a holistic recovery.
+              Mothers have seen improvements in just 3-4 days of starting our
+              treatments, including better sleep and a noticeable reduction in
+              pain and discomfort.
+            </p>
+
+            <p>
+              Mothers have seen improvements in just 3-4 days of starting our
+              treatments, including better sleep and a noticeable reduction in
+              pain and discomfort.
+            </p>
+
+            <Link href="/booking" className="w-fit">
+              <Button variant="primary">BOOK NOW</Button>
+            </Link>
+          </div>
+        }
+        sectionClassName="bg-accent-1"
+      />
+    </main>
+  );
+};
+
+export default HomePage;
