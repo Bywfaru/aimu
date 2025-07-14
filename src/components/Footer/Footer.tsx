@@ -64,8 +64,8 @@ export const Footer: FC<FooterProps> = ({
             'flex-col',
             'items-center',
             'gap-10',
-            'lg:flex-row',
-            'lg:items-start',
+            'md:flex-row',
+            'md:items-start',
           )}
         >
           <Link href="/" className="w-fit">
@@ -74,14 +74,14 @@ export const Footer: FC<FooterProps> = ({
               alt="Aimu logo"
               height={76}
               width={180}
-              className="lg:hidden"
+              className="md:hidden"
             />
             <Image
               src="/images/aimu_wordmark_dark_bg.png"
               alt="Aimu logo"
               height={102}
               width={240}
-              className={clsx(['hidden', 'lg:block'])}
+              className={clsx(['hidden', 'md:block'])}
             />
           </Link>
 
@@ -89,9 +89,7 @@ export const Footer: FC<FooterProps> = ({
             className={clsx(['w-full', 'flex', 'justify-between', 'gap-10'])}
           >
             <div className={clsx(['flex', 'flex-col', 'gap-5'])}>
-              <ul
-                className={clsx(['flex', 'flex-col', 'list-none', 'gap-2.5'])}
-              >
+              <ul className={clsx(['flex', 'flex-col', 'list-none', 'gap-3'])}>
                 {links.map((link, index) => (
                   <Link
                     key={`${link.href}_${index}`}
@@ -107,14 +105,19 @@ export const Footer: FC<FooterProps> = ({
                 ))}
               </ul>
 
-              <Link href="/booking" className="w-fit">
+              <Link href="/book" className="w-fit">
                 <Button variant="secondary">BOOK NOW</Button>
               </Link>
             </div>
 
             <div className={clsx(['flex', 'flex-col', 'text-right', 'gap-10'])}>
               {!!contact && (
-                <div>
+                <div
+                  className={clsx([
+                    '[&_a]:hover:underline',
+                    '[&_a]:hover:text-accent-2',
+                  ])}
+                >
                   <p className={clsx(['font-brolian', 'text-2xl'])}>
                     Contact Us
                   </p>
@@ -129,7 +132,14 @@ export const Footer: FC<FooterProps> = ({
               )}
 
               {!!socialMedia && (
-                <div className={clsx(['flex', 'flex-col', 'items-end'])}>
+                <div
+                  className={clsx([
+                    'flex',
+                    'flex-col',
+                    'items-end',
+                    '[&_a]:hover:text-accent-2',
+                  ])}
+                >
                   <p className={clsx(['font-brolian', 'text-2xl'])}>Socials</p>
 
                   {!!socialMedia.instagram && (

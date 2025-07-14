@@ -6,12 +6,16 @@ export interface ParagraphImageSectionProps {
   title: string;
   content: ReactNode;
   image: string;
+  backgroundColor?: string;
+  reverse?: boolean;
 }
 
 export const ParagraphImageSection: FC<ParagraphImageSectionProps> = ({
-  image,
+  backgroundColor,
   content,
+  image,
   title,
+  reverse = false,
 }) => {
   return (
     <section
@@ -20,25 +24,30 @@ export const ParagraphImageSection: FC<ParagraphImageSectionProps> = ({
         'flex',
         'flex-col',
         'gap-5',
-        'bg-accent-1',
-        'lg:flex-row',
-        'lg:gap-0',
-        'lg:items-stretch',
+        'md:gap-0',
+        'md:items-stretch',
+        reverse ? 'md:flex-row-reverse' : 'md:flex-row',
       ])}
+      style={{ backgroundColor }}
     >
-      <div className={clsx(['flex', 'justify-end', 'flex-1'])}>
+      <div
+        className={clsx([
+          'flex',
+          'flex-1',
+          reverse ? 'justify-start' : 'justify-end',
+        ])}
+      >
         <div
           className={clsx([
             'flex',
             'flex-col',
-            'gap-2.5',
+            'gap-3',
             'px-5',
             'pt-10',
             'flex-1',
-            'lg:max-w-lg',
-            'lg:py-20',
-            'lg:pr-10',
-            'lg:pl-0',
+            'md:max-w-lg',
+            'md:py-20',
+            'md:px-10',
           ])}
         >
           <h2 className={clsx(['text-4xl', 'text-primary-3'])}>{title}</h2>
@@ -52,8 +61,8 @@ export const ParagraphImageSection: FC<ParagraphImageSectionProps> = ({
           'w-full',
           'h-80',
           'relative',
-          'lg:flex-1',
-          'lg:h-auto',
+          'md:flex-1',
+          'md:h-auto',
         ])}
       >
         <BackgroundImage src={image} zIndex={0} />

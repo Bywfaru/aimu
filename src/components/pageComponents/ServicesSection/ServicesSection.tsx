@@ -7,7 +7,7 @@ import type { FC, ReactNode } from 'react';
 
 export interface ServiceItem {
   name: string;
-  href: string;
+  url: string;
   image: string;
 }
 
@@ -23,7 +23,7 @@ export const ServicesSection: FC<ServicesSectionProps> = ({
   content,
 }) => {
   return (
-    <section className={clsx(['w-full', 'py-10'])}>
+    <section className="w-full">
       <div
         className={clsx([
           'w-full',
@@ -45,7 +45,7 @@ export const ServicesSection: FC<ServicesSectionProps> = ({
             'mx-auto',
           ])}
         >
-          <div className={clsx(['flex', 'flex-col', 'gap-2.5'])}>
+          <div className={clsx(['flex', 'flex-col', 'gap-3'])}>
             <h2 className={clsx(['text-4xl', 'text-primary-3', 'text-center'])}>
               {title}
             </h2>
@@ -59,14 +59,14 @@ export const ServicesSection: FC<ServicesSectionProps> = ({
             'w-full',
             'grid',
             'grid-cols-1',
-            'lg:grid-cols-2',
+            'md:grid-cols-2',
             'justify-stretch',
           ])}
         >
           {services.map((service, index) => (
             <Link
-              key={`${service.href}_${index}`}
-              href={service.href}
+              key={`${service.url}_${index}`}
+              href={service.url}
               className={clsx(['group'])}
             >
               <div
@@ -90,8 +90,8 @@ export const ServicesSection: FC<ServicesSectionProps> = ({
                     'left-0',
                     'bg-black/60',
                     'z-[-1]',
-                    'lg:bg-black/0',
-                    'lg:group-hover:bg-black/60',
+                    'md:bg-black/0',
+                    'md:group-hover:bg-black/60',
                     'transition',
                   ])}
                 ></div>
@@ -100,8 +100,8 @@ export const ServicesSection: FC<ServicesSectionProps> = ({
                 <div
                   className={clsx([
                     'overflow-hidden',
-                    'lg:max-h-0',
-                    'lg:group-hover:max-h-50',
+                    'md:max-h-0',
+                    'md:group-hover:max-h-50',
                     'transition-all',
                   ])}
                 >

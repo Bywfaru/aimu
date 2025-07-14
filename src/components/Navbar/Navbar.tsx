@@ -39,7 +39,7 @@ export const Navbar: FC<NavbarProps> = ({ links = [] }) => {
           'grid',
           'grid-cols-3',
           'px-5',
-          'py-2.5',
+          'py-3',
           'gap-5',
           'items-center',
         ])}
@@ -64,20 +64,20 @@ export const Navbar: FC<NavbarProps> = ({ links = [] }) => {
           />
         </Link>
 
-        <button className={clsx(['w-fit', 'lg:hidden', 'justify-self-end'])}>
+        <button className={clsx(['w-fit', 'md:hidden', 'justify-self-end'])}>
           <Menu size={30} className={clsx(['text-text-light'])} />
         </button>
 
         <Link
-          href="/booking"
-          className={clsx(['hidden', 'lg:flex', 'justify-self-end'])}
+          href="/book"
+          className={clsx(['hidden', 'md:flex', 'justify-self-end'])}
         >
           <Button variant="secondary">BOOK NOW</Button>
         </Link>
       </div>
 
       {links.length > 0 && (
-        <ul className={clsx(['hidden', 'list-none', 'lg:flex', 'px-5'])}>
+        <ul className={clsx(['hidden', 'list-none', 'md:flex', 'px-5'])}>
           {links.map((link, index) => {
             const isActive = pathname === link.href;
 
@@ -86,7 +86,7 @@ export const Navbar: FC<NavbarProps> = ({ links = [] }) => {
                 <li
                   className={clsx([
                     'px-5',
-                    'py-2.5',
+                    'py-3',
                     'border-primary-1',
                     isActive && ['border-b-4', 'text-primary-1'],
                     !isActive && ['hover:text-accent-2'],

@@ -39,7 +39,7 @@ export const Button: FC<ButtonProps> = ({
         'border',
         'transition-colors',
         'px-5',
-        'py-2.5',
+        'py-3',
         'rounded-sm',
         { 'w-full': fullWidth },
         { 'w-fit': !fullWidth },

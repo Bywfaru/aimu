@@ -4,7 +4,8 @@ import {
   ParagraphImageSection,
   ParagraphSection,
   ServicesSection,
-} from '@/components/pageComponents/homePage';
+  Spacer,
+} from '@/components/pageComponents';
 import clsx from 'clsx';
 import Link from 'next/link';
 import type { FC } from 'react';
@@ -13,6 +14,7 @@ const HomePage: FC = () => {
   return (
     <main>
       <HeroSection />
+      <Spacer className={clsx(['h-10', 'md:h-20'])} />
       <ParagraphSection
         content={
           <div
@@ -39,6 +41,7 @@ const HomePage: FC = () => {
           </div>
         }
       />
+      <Spacer className={clsx(['h-10', 'md:h-20'])} />
       <ParagraphImageSection
         image="/images/pexels-kpaukshtite-3242264.jpg"
         title="Our Mission & Values"
@@ -53,14 +56,16 @@ const HomePage: FC = () => {
             efficient for every mom.
           </p>
         }
+        backgroundColor="var(--color-accent-1)"
       />
+      <Spacer className="h-10" />
       <ServicesSection
         title="Services & Treatments"
         content={
           <div
             className={clsx([
               'text-center',
-              'lg:text-justify',
+              'md:text-justify',
               'flex',
               'flex-col',
               'gap-5',
@@ -82,39 +87,41 @@ const HomePage: FC = () => {
         services={[
           {
             name: 'BELLY BINDING (10-DAY POSTPARTUM PROGRAM)',
-            href: '/booking',
+            url: '/book',
             image: '/images/belly_binding.jpeg',
           },
           {
             name: 'STRETCH MARK REDUCTION & DETOX MASSAGE',
-            href: '/booking',
+            url: '/book',
             image: '/images/pexels-yankrukov-5793990.jpg',
           },
           {
             name: 'PELVIC & PUBIC BONE RECOVERY',
-            href: '/booking',
+            url: '/book',
             image: '/images/pexels-cottonbro-6542718.jpg',
           },
           {
             name: 'MAGNETIC WAND THERAPY',
-            href: '/booking',
+            url: '/book',
             image: '/images/magnetic_wand.jpeg',
           },
           {
             name: 'PREGNANCY MASSAGE',
-            href: '/booking',
+            url: '/book',
             image: '/images/pexels-jonathanborba-19666196.jpg',
           },
           {
             name: 'LACTATION CONSULTATION',
-            href: '/booking',
+            url: '/book',
             image: '/images/pexels-sarah-chai-7282910.jpg',
           },
         ]}
       />
+      <Spacer className="h-10" />
+      <Spacer className={clsx(['h-10', 'md:h-20', 'bg-accent-1'])} />
       <ParagraphSection
         title={
-          <span className={clsx(['w-full', 'lg:text-center', 'block'])}>
+          <span className={clsx(['w-full', 'md:text-center', 'block'])}>
             Why Choose Us?
           </span>
         }
@@ -126,7 +133,8 @@ const HomePage: FC = () => {
               'flex',
               'flex-col',
               'gap-5',
-              'lg:items-center',
+              'text-justify',
+              'md:items-center',
             ])}
           >
             <p>
@@ -144,13 +152,14 @@ const HomePage: FC = () => {
               pain and discomfort.
             </p>
 
-            <Link href="/booking" className="w-fit">
+            <Link href="/book" className="w-fit">
               <Button variant="primary">BOOK NOW</Button>
             </Link>
           </div>
         }
-        sectionClassName="bg-accent-1"
+        backgroundColor="var(--color-accent-1)"
       />
+      <Spacer className={clsx(['h-10', 'md:h-20', 'bg-accent-1'])} />
     </main>
   );
 };

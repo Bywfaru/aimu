@@ -16,7 +16,7 @@ export const HeroSection: FC = () => {
         'py-10',
         'flex',
         'items-center',
-        'lg:min-h-[calc(80vh-150px)]',
+        'md:min-h-[calc(80vh-150px)]',
       ])}
     >
       <BackgroundImage
@@ -35,10 +35,10 @@ export const HeroSection: FC = () => {
             'backdrop-blur-sm',
             'max-w-2/3',
             'gap-5',
-            'lg:max-w-xl',
+            'md:max-w-xl',
           ])}
         >
-          <div className={clsx(['flex', 'flex-col', 'gap-2.5'])}>
+          <div className={clsx(['flex', 'flex-col', 'gap-3'])}>
             <h2 className={clsx(['text-5xl', 'text-primary-3', 'max-w-2/3'])}>
               Post&shy;partum wellness redefined
             </h2>
@@ -49,7 +49,7 @@ export const HeroSection: FC = () => {
             </p>
           </div>
 
-          <Link href="/booking" className="w-fit">
+          <Link href="/book" className="w-fit">
             <Button>BOOK NOW</Button>
           </Link>
         </div>

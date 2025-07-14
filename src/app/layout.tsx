@@ -89,7 +89,7 @@ const footerLinks: FooterLinkItem[] = [
     label: 'Services',
   },
   {
-    href: '/booking',
+    href: '/book',
     label: 'Booking',
   },
   {
