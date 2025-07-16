@@ -29,7 +29,7 @@ const SERVICES: Service[] = [
       </>
     ),
     image: '/images/belly_binding.jpeg',
-    url: '/book/belly-binding',
+    url: '/book',
   },
   {
     name: (
@@ -47,7 +47,7 @@ const SERVICES: Service[] = [
       </p>
     ),
     image: '/images/pexels-yankrukov-5793990.jpg',
-    url: '/book/stretch-mark-reduction-detox-massage',
+    url: '/book',
   },
   {
     name: (
@@ -65,7 +65,7 @@ const SERVICES: Service[] = [
       </p>
     ),
     image: '/images/pexels-cottonbro-6542718.jpg',
-    url: '/book/pelvic-pubic-bone-recovery',
+    url: '/book',
   },
   {
     name: 'MAGNETIC WAND THERAPY',
@@ -77,7 +77,7 @@ const SERVICES: Service[] = [
       </p>
     ),
     image: '/images/magnetic_wand.jpeg',
-    url: '/book/magnetic-wand-therapy',
+    url: '/book',
   },
   {
     name: 'PREGNANCY MASSAGE',
@@ -90,7 +90,7 @@ const SERVICES: Service[] = [
       </p>
     ),
     image: '/images/pexels-jonathanborba-19666196.jpg',
-    url: '/book/pregnancy-massage',
+    url: '/book',
   },
   {
     name: 'LACTATION CONSULTATION',
@@ -103,7 +103,7 @@ const SERVICES: Service[] = [
       </p>
     ),
     image: '/images/pexels-sarah-chai-7282910.jpg',
-    url: '/book/belly-binding',
+    url: '/book',
   },
 ];
 
