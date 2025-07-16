@@ -5,3 +5,4 @@ export * from './ServicesSection';
 export * from './PageTitleSection';
 export * from './Spacer';
 export * from './ParagraphOverImage';
+export * from './BookingWidget';
