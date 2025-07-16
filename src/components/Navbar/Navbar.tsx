@@ -59,7 +59,7 @@ export const Navbar: FC<NavbarProps> = ({ links = [] }) => {
             'items-center',
           ])}
         >
-          <Link href="/" className="w-fit" onClick={toggleIsMenuOpen}>
+          <Link href="/" className="w-fit">
             <Image
               src="/images/aimu_logo_dark_bg.png"
               alt="Aimu logo"
@@ -109,7 +109,6 @@ export const Navbar: FC<NavbarProps> = ({ links = [] }) => {
                       isActive && ['border-b-4', 'text-primary-1'],
                       !isActive && ['hover:text-accent-2'],
                     ])}
-                    onClick={toggleIsMenuOpen}
                   >
                     {link.label}
                   </li>
@@ -171,7 +170,7 @@ export const Navbar: FC<NavbarProps> = ({ links = [] }) => {
               'justify-between',
             ])}
           >
-            <Link href="/" className="w-fit">
+            <Link href="/" className="w-fit" onClick={toggleIsMenuOpen}>
               <Image
                 src="/images/aimu_wordmark_dark_bg.png"
                 alt="Aimu logo"
@@ -201,7 +200,9 @@ export const Navbar: FC<NavbarProps> = ({ links = [] }) => {
           >
             {links.map((link, index) => (
               <li key={`${link.href}_${index}`}>
-                <Link href={link.href}>{link.label}</Link>
+                <Link href={link.href} onClick={toggleIsMenuOpen}>
+                  {link.label}
+                </Link>
               </li>
             ))}
           </ul>
