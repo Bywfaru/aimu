@@ -25,8 +25,6 @@ export const Navbar: FC<NavbarProps> = ({ links = [] }) => {
   const toggleIsMenuOpen = () => setIsMenuOpen((prev) => !prev);
 
   useEffect(() => {
-    console.log('isMenuOpen', isMenuOpen);
-
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
