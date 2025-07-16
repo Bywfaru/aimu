@@ -38,6 +38,7 @@ const TestimonialsPage: FC = async () => {
           'items-center',
           'max-w-5xl',
           'gap-5',
+          'mx-auto',
         ])}
       >
         <h2
