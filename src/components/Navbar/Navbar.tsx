@@ -207,7 +207,11 @@ export const Navbar: FC<NavbarProps> = ({ links = [] }) => {
             ))}
           </ul>
 
-          <Link href="/book" className={clsx(['w-fit', 'self-end'])}>
+          <Link
+            href="/book"
+            className={clsx(['w-fit', 'self-end'])}
+            onClick={toggleIsMenuOpen}
+          >
             <Button variant="secondary">BOOK NOW</Button>
           </Link>
         </aside>
