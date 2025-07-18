@@ -1,6 +1,6 @@
 'use client';
 
-import type { Service } from '@/app/services/page';
+import type { Service } from '@/app/(app)/services/page';
 import { BackgroundImage, Button } from '@/components';
 import { NavigationButton } from '@/components/pageComponents/servicesPage/ServicesCarousel/components';
 import clsx from 'clsx';
