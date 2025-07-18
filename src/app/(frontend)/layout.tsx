@@ -6,7 +6,7 @@ import {
 } from '@/components';
 import clsx from 'clsx';
 import type { Metadata } from 'next';
-import '../globals.css';
+import './globals.css';
 import localFont from 'next/font/local';
 import type { FC, PropsWithChildren } from 'react';
 

@@ -1,6 +1,6 @@
 'use client';
 
-import type { Service } from '@/app/(app)/services/page';
+import type { Service } from '@/app/(frontend)/services/page';
 import { BackgroundImage, Button } from '@/components';
 import { NavigationButton } from '@/components/pageComponents/servicesPage/ServicesCarousel/components';
 import clsx from 'clsx';
@@ -16,7 +16,6 @@ import {
 
 import 'swiper/css';
 import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 
 export interface ServicesCarouselProps {
   services: Service[];
