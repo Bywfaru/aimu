@@ -6,7 +6,14 @@ import {
   Spacer,
 } from '@/components/pageComponents';
 import clsx from 'clsx';
+import type { Metadata } from 'next';
 import type { FC } from 'react';
+
+export const metadata: Metadata = {
+  title: 'About Us',
+  description:
+    'Learn more about Aimu, our mission, and how we are revolutionizing postpartum care in North America.',
+};
 
 const AboutUsPage: FC = () => {
   return (

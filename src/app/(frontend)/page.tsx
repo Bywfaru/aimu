@@ -6,11 +6,20 @@ import {
   ServicesSection,
   Spacer,
 } from '@/components/pageComponents';
+import config from '@payload-config';
 import clsx from 'clsx';
 import Link from 'next/link';
+import { getPayload } from 'payload';
 import type { FC } from 'react';
 
-const HomePage: FC = () => {
+export const revalidate = 3600;
+
+const HomePage: FC = async () => {
+  const payload = await getPayload({ config });
+  const services = await payload.find({
+    collection: 'services',
+  });
+
   return (
     <main>
       <HeroSection />
@@ -84,38 +93,7 @@ const HomePage: FC = () => {
             </p>
           </div>
         }
-        services={[
-          {
-            name: 'BELLY BINDING (10-DAY POSTPARTUM PROGRAM)',
-            url: '/book',
-            image: '/images/belly_binding.jpeg',
-          },
-          {
-            name: 'STRETCH MARK REDUCTION & DETOX MASSAGE',
-            url: '/book',
-            image: '/images/pexels-yankrukov-5793990.jpg',
-          },
-          {
-            name: 'PELVIC & PUBIC BONE RECOVERY',
-            url: '/book',
-            image: '/images/pexels-cottonbro-6542718.jpg',
-          },
-          {
-            name: 'MAGNETIC WAND THERAPY',
-            url: '/book',
-            image: '/images/magnetic_wand.jpeg',
-          },
-          {
-            name: 'PREGNANCY MASSAGE',
-            url: '/book',
-            image: '/images/pexels-jonathanborba-19666196.jpg',
-          },
-          {
-            name: 'LACTATION CONSULTATION',
-            url: '/book',
-            image: '/images/pexels-sarah-chai-7282910.jpg',
-          },
-        ]}
+        services={services.docs}
       />
       <Spacer className="h-10" />
       <Spacer className={clsx(['h-10', 'md:h-20', 'bg-accent-1'])} />
@@ -141,9 +119,6 @@ const HomePage: FC = () => {
               At Aimu, we personalize every treatment to suit your specific
               needs. After assessing your postpartum condition, we craft a plan
               that targets your areas of concern, ensuring a holistic recovery.
-              Mothers have seen improvements in just 3-4 days of starting our
-              treatments, including better sleep and a noticeable reduction in
-              pain and discomfort.
             </p>
 
             <p>

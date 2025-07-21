@@ -2,13 +2,13 @@ import { BackgroundImage } from '@/components';
 import clsx from 'clsx';
 import type { FC, ReactNode } from 'react';
 
-export interface ParagraphImageSectionProps {
+export type ParagraphImageSectionProps = {
   title: string;
   content: ReactNode;
   image: string;
   backgroundColor?: string;
   reverse?: boolean;
-}
+};
 
 export const ParagraphImageSection: FC<ParagraphImageSectionProps> = ({
   backgroundColor,
@@ -46,13 +46,15 @@ export const ParagraphImageSection: FC<ParagraphImageSectionProps> = ({
             'pt-10',
             'flex-1',
             'md:max-w-lg',
+            reverse
+              ? ['md:pl-10', 'md:pr-5', 'lg:pr-0']
+              : ['md:pr-10', 'md:pl-5', 'lg:pl-0'],
             'md:py-20',
-            'md:px-10',
           ])}
         >
           <h2 className={clsx(['text-4xl', 'text-primary-3'])}>{title}</h2>
 
-          {content}
+          <div className="text-justify">{content}</div>
         </div>
       </div>
 

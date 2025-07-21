@@ -12,12 +12,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { FC } from 'react';
 
-export interface FooterLinkItem {
+export type FooterLinkItem = {
   href: string;
   label: string;
-}
+};
 
-export interface FooterProps {
+export type FooterProps = {
   links?: FooterLinkItem[];
   contact?: {
     email?: string;
@@ -29,7 +29,7 @@ export interface FooterProps {
     instagram?: string;
     whatsapp?: string;
   };
-}
+};
 
 export const Footer: FC<FooterProps> = ({
   links = [],

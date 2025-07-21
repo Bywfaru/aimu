@@ -5,13 +5,13 @@ import { ChevronLeft } from 'lucide-react';
 import type { FC } from 'react';
 import { useSwiper } from 'swiper/react';
 
-export interface NavigationButtonProps {
+export type NavigationButtonProps = {
   direction: 'back' | 'next';
   className?: string;
   disabled?: boolean;
-}
+};
 
-export const NavigationButton: FC<NavigationButtonProps> = ({
+export const CarouselNavigationButton: FC<NavigationButtonProps> = ({
   className,
   direction,
   disabled = false,

@@ -2,11 +2,11 @@ import { BackgroundImage } from '@/components';
 import clsx from 'clsx';
 import type { FC, ReactNode } from 'react';
 
-export interface ParagraphOverImageProps {
+export type ParagraphOverImageProps = {
   title: string;
   content: ReactNode;
   image: string;
-}
+};
 
 export const ParagraphOverImage: FC<ParagraphOverImageProps> = ({
   image,

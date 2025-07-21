@@ -1,14 +1,13 @@
 import clsx from 'clsx';
 import type { ButtonHTMLAttributes, DetailedHTMLProps, FC } from 'react';
 
-export interface ButtonProps
-  extends DetailedHTMLProps<
-    ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  > {
+export type ButtonProps = DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+> & {
   variant?: 'primary' | 'secondary';
   fullWidth?: boolean;
-}
+};
 
 export const Button: FC<ButtonProps> = ({
   className,

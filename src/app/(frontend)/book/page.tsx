@@ -1,5 +1,11 @@
 import { BookingWidget, PageTitleSection } from '@/components/pageComponents';
+import type { Metadata } from 'next';
 import { type FC } from 'react';
+
+export const metadata: Metadata = {
+  title: 'Book a Service',
+  description: 'Book a service with us online',
+};
 
 const BookPage: FC = () => {
   return (

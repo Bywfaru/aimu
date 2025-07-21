@@ -2,10 +2,10 @@ import { BackgroundImage } from '@/components';
 import clsx from 'clsx';
 import type { FC } from 'react';
 
-export interface PageTitleSectionProps {
+export type PageTitleSectionProps = {
   title: string;
   backgroundImage: string;
-}
+};
 
 export const PageTitleSection: FC<PageTitleSectionProps> = ({
   backgroundImage,
@@ -21,6 +21,7 @@ export const PageTitleSection: FC<PageTitleSectionProps> = ({
         'py-3',
         'relative',
         'md:h-100',
+        'lg:px-0',
       ])}
     >
       <BackgroundImage src={backgroundImage} />

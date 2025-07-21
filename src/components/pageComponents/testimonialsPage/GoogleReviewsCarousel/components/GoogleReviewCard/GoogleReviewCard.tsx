@@ -4,9 +4,9 @@ import type { places_v1 } from 'googleapis';
 import { type FC, useEffect, useRef, useState } from 'react';
 import { StarRating } from './components';
 
-export interface GoogleReviewCardProps {
+export type GoogleReviewCardProps = {
   review: places_v1.Schema$GoogleMapsPlacesV1Review;
-}
+};
 
 export const GoogleReviewCard: FC<GoogleReviewCardProps> = ({ review }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);

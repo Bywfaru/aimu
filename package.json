@@ -2,6 +2,7 @@
   "name": "aimu",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -15,6 +16,8 @@
     "@payloadcms/next": "^3.48.0",
     "@payloadcms/payload-cloud": "^3.48.0",
     "@payloadcms/richtext-lexical": "^3.48.0",
+    "@payloadcms/storage-s3": "^3.48.0",
+    "@payloadcms/ui": "^3.48.0",
     "clsx": "^2.1.1",
     "googleapis": "^152.0.0",
     "graphql": "^16.11.0",

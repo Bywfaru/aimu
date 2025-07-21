@@ -1,21 +1,16 @@
 'use client';
 
 import { BackgroundImage, Button } from '@/components';
+import { Service } from '@/payload-types';
 import clsx from 'clsx';
 import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
 
-export interface ServiceItem {
-  name: string;
-  url: string;
-  image: string;
-}
-
-export interface ServicesSectionProps {
+export type ServicesSectionProps = {
   title: string;
   content: ReactNode;
-  services: ServiceItem[];
-}
+  services: Service[];
+};
 
 export const ServicesSection: FC<ServicesSectionProps> = ({
   services,
@@ -63,53 +58,65 @@ export const ServicesSection: FC<ServicesSectionProps> = ({
             'justify-stretch',
           ])}
         >
-          {services.map((service, index) => (
-            <Link
-              key={`${service.url}_${index}`}
-              href={service.url}
-              className={clsx(['group'])}
-            >
-              <div
-                className={clsx([
-                  'flex',
-                  'flex-col',
-                  'p-5',
-                  'justify-end',
-                  'relative',
-                  'h-75',
-                  'text-text-light',
-                  'text-2xl',
-                ])}
-              >
-                <BackgroundImage src={service.image} />
-                <div
-                  className={clsx([
-                    'absolute',
-                    'size-full',
-                    'top-0',
-                    'left-0',
-                    'bg-black/60',
-                    'z-[-1]',
-                    'md:bg-black/0',
-                    'md:group-hover:bg-black/60',
-                    'transition',
-                  ])}
-                ></div>
+          {services.map((service) => {
+            const media = service.media?.[0];
 
-                <p className={clsx(['uppercase'])}>{service.name}</p>
+            return (
+              <Link
+                key={service.id}
+                href={`/services/${service.slug}`}
+                className={clsx(['group'])}
+              >
                 <div
                   className={clsx([
-                    'overflow-hidden',
-                    'md:max-h-0',
-                    'md:group-hover:max-h-50',
-                    'transition-all',
+                    'flex',
+                    'flex-col',
+                    'p-5',
+                    'justify-end',
+                    'relative',
+                    'h-75',
+                    'text-text-light',
+                    'text-2xl',
                   ])}
                 >
-                  <Button className={clsx(['mt-5'])}>BOOK NOW</Button>
+                  <BackgroundImage
+                    src={
+                      typeof media?.item === 'string'
+                        ? media.item
+                        : (media?.item.url ?? '')
+                    }
+                  />
+
+                  <div
+                    className={clsx([
+                      'absolute',
+                      'size-full',
+                      'top-0',
+                      'left-0',
+                      'bg-black/60',
+                      'z-[-1]',
+                      'md:bg-black/0',
+                      'md:group-hover:bg-black/60',
+                      'transition',
+                    ])}
+                  ></div>
+
+                  <p className={clsx(['uppercase'])}>{service.title}</p>
+
+                  <div
+                    className={clsx([
+                      'overflow-hidden',
+                      'md:max-h-0',
+                      'md:group-hover:max-h-50',
+                      'transition-all',
+                    ])}
+                  >
+                    <Button className={clsx(['mt-5'])}>LEARN MORE</Button>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
         </div>
 
         <Link href="/services" className="w-fit">

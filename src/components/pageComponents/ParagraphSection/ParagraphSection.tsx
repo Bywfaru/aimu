@@ -3,11 +3,11 @@
 import clsx from 'clsx';
 import type { FC, ReactNode } from 'react';
 
-export interface ParagraphSectionProps {
+export type ParagraphSectionProps = {
   title?: ReactNode;
   content: ReactNode;
   backgroundColor?: string;
-}
+};
 
 export const ParagraphSection: FC<ParagraphSectionProps> = ({
   backgroundColor,

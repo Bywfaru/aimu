@@ -2,21 +2,28 @@ import { PageTitleSection, Spacer } from '@/components/pageComponents';
 import { GoogleReviewsCarousel } from '@/components/pageComponents/testimonialsPage';
 import clsx from 'clsx';
 import { google } from 'googleapis';
+import type { Metadata } from 'next';
 import { type FC, type ReactNode } from 'react';
 
-export interface Testimonial {
+export type Testimonial = {
   content: ReactNode;
-}
+};
 
 // const TESTIMONIALS: Testimonial[] = [];
+
+export const metadata: Metadata = {
+  title: 'Testimonials & Reviews',
+  description:
+    'Read our testimonials and Google reviews from satisfied clients.',
+};
 
 const TestimonialsPage: FC = async () => {
   const places = google.places({
     version: 'v1',
-    auth: process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY,
+    auth: process.env.GOOGLE_PLACES_API_KEY,
   });
   const place = await places.places.get({
-    name: `places/${process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID}`,
+    name: `places/${process.env.GOOGLE_PLACE_ID}`,
     fields: 'reviews,rating',
   });
   const { reviews } = place.data;

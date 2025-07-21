@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import type { FC } from 'react';
 
-export interface SpacerProps {
+export type SpacerProps = {
   backgroundColor?: string;
   className?: string;
-}
+};
 
 export const Spacer: FC<SpacerProps> = ({ backgroundColor, className }) => {
   return (

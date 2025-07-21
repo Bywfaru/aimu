@@ -2,10 +2,10 @@ import clsx from 'clsx';
 import { Star, StarHalf } from 'lucide-react';
 import type { FC } from 'react';
 
-export interface StarRatingProps {
+export type StarRatingProps = {
   rating?: number;
   maxRating: number;
-}
+};
 
 export const StarRating: FC<StarRatingProps> = ({ maxRating, rating = 0 }) => {
   const numFullStars = Math.floor(rating);

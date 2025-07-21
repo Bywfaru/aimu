@@ -1,7 +1,12 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      readonly NEXT_PUBLIC_GOOGLE_PLACE_API_KEY: string;
+      readonly GOOGLE_PLACE_API_KEY: string;
+      readonly GOOGLE_PLACE_ID: string;
+      readonly R2_ACCESS_KEY_ID: string;
+      readonly R2_SECRET_ACCESS_KEY: string;
+      readonly R2_BUCKET_NAME: string;
+      readonly R2_ENDPOINT: string;
     }
   }
 }

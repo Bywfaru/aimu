@@ -8,14 +8,14 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { type FC, useEffect, useState } from 'react';
 
-export interface NavbarLinkItem {
+export type NavbarLinkItem = {
   href: string;
   label: string;
-}
+};
 
-export interface NavbarProps {
+export type NavbarProps = {
   links?: NavbarLinkItem[];
-}
+};
 
 export const Navbar: FC<NavbarProps> = ({ links = [] }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

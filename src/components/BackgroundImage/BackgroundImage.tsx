@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import Image, { type ImageProps } from 'next/image';
 import type { FC } from 'react';
 
-export interface BackgroundImageProps {
+export type BackgroundImageProps = {
   src: ImageProps['src'];
   alt?: ImageProps['alt'];
   loading?: ImageProps['loading'];
@@ -13,7 +13,7 @@ export interface BackgroundImageProps {
   quality?: ImageProps['quality'];
   placeholder?: ImageProps['placeholder'];
   zIndex?: number;
-}
+};
 
 export const BackgroundImage: FC<BackgroundImageProps> = ({
   placeholder,

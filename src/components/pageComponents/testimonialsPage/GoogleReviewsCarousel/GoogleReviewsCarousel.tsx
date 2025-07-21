@@ -1,7 +1,6 @@
 'use client';
 
-import { NavigationButton } from '@/components/pageComponents/servicesPage/ServicesCarousel/components';
-import { GoogleReviewCard } from '@/components/pageComponents/testimonialsPage/GoogleReviewsCarousel/components';
+import { CarouselNavigationButton } from '@/components';
 import clsx from 'clsx';
 import { type places_v1 } from 'googleapis';
 import { type FC, useState } from 'react';
@@ -10,11 +9,12 @@ import { Swiper, type SwiperProps, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { GoogleReviewCard } from './components';
 import 'swiper/css/pagination';
 
-export interface GoogleReviewsCarouselProps {
+export type GoogleReviewsCarouselProps = {
   reviews?: places_v1.Schema$GoogleMapsPlacesV1Review[];
-}
+};
 
 export const GoogleReviewsCarousel: FC<GoogleReviewsCarouselProps> = ({
   reviews = [],
@@ -57,7 +57,7 @@ export const GoogleReviewsCarousel: FC<GoogleReviewsCarouselProps> = ({
             'gap-5',
           ])}
         >
-          <NavigationButton
+          <CarouselNavigationButton
             direction="back"
             className={clsx([
               'absolute',
@@ -82,7 +82,7 @@ export const GoogleReviewsCarousel: FC<GoogleReviewsCarouselProps> = ({
             </SwiperSlide>
           ))}
 
-          <NavigationButton
+          <CarouselNavigationButton
             direction="next"
             className={clsx([
               'absolute',
