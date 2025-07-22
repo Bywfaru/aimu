@@ -85,6 +85,10 @@ export const ServicesSection: FC<ServicesSectionProps> = ({
                         ? media.item
                         : (media?.item.url ?? '')
                     }
+                    imageClassName={clsx([
+                      'group-hover:scale-105',
+                      'transition',
+                    ])}
                   />
 
                   <div
@@ -98,6 +102,7 @@ export const ServicesSection: FC<ServicesSectionProps> = ({
                       'md:bg-black/0',
                       'md:group-hover:bg-black/60',
                       'transition',
+                      'group-hover:backdrop-blur-xs',
                     ])}
                   ></div>
 

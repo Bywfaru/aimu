@@ -13,9 +13,13 @@ export type BackgroundImageProps = {
   quality?: ImageProps['quality'];
   placeholder?: ImageProps['placeholder'];
   zIndex?: number;
+  imageClassName?: string;
+  containerClassName?: string;
 };
 
 export const BackgroundImage: FC<BackgroundImageProps> = ({
+  containerClassName,
+  imageClassName,
   placeholder,
   src,
   alt = '',
@@ -27,7 +31,14 @@ export const BackgroundImage: FC<BackgroundImageProps> = ({
 }) => {
   return (
     <div
-      className={clsx(['size-full', 'absolute', 'top-0', 'left-0'])}
+      className={clsx([
+        'size-full',
+        'absolute',
+        'top-0',
+        'left-0',
+        'overflow-hidden',
+        containerClassName,
+      ])}
       style={{ zIndex }}
     >
       <Image
@@ -40,6 +51,7 @@ export const BackgroundImage: FC<BackgroundImageProps> = ({
           objectPosition,
         }}
         loading={loading}
+        className={imageClassName}
         fill
       />
     </div>
