@@ -1,4 +1,5 @@
-import { PageTitleSection, Spacer } from '@/components/pageComponents';
+import { BackgroundImage } from '@/components';
+import { Spacer } from '@/components/pageComponents';
 import config from '@payload-config';
 import { convertLexicalToHTML } from '@payloadcms/richtext-lexical';
 import clsx from 'clsx';
@@ -70,59 +71,91 @@ const ServicesPage: FC<PageProps> = async ({ params }) => {
 
   return (
     <main>
-      <PageTitleSection
-        title={service.title}
-        backgroundImage={backgroundImage}
-      />
+      <Spacer className="h-5" />
+
+      <div
+        className={clsx([
+          'gap-2',
+          'text-primary-3',
+          'max-w-5xl',
+          'mx-auto',
+          'px-5',
+          'lg:px-0',
+          '',
+        ])}
+      >
+        <p>
+          <Link
+            href="/services"
+            className={clsx(['hover:underline', 'gap-1', 'lg:pl-0'])}
+          >
+            <ChevronLeft size={16} className={clsx(['inline-block', 'mb-1'])} />{' '}
+            Services
+          </Link>{' '}
+          / {service.title}
+        </p>
+      </div>
+
+      <Spacer className={clsx(['h-5', 'lg:h-10'])} />
+
+      <div className={clsx(['w-full', 'max-w-5xl', 'mx-auto'])}>
+        <h1
+          className={clsx([
+            'px-5',
+            'text-3xl',
+            'text-primary-3',
+            'w-fit',
+            'md:text-5xl',
+            'lg:px-0',
+          ])}
+        >
+          {service.title}
+        </h1>
+
+        <p
+          className={clsx([
+            'w-full',
+            'px-5',
+            'lg:px-0',
+            'max-w-5xl',
+            'mx-auto',
+          ])}
+        >
+          {service.summary}
+        </p>
+      </div>
 
       <Spacer className="h-5" />
 
       <div
         className={clsx([
-          'flex',
-          'items-center',
-          'gap-2',
-          'text-primary-3',
+          'w-full',
           'max-w-5xl',
           'mx-auto',
+          'relative',
+          'h-75',
+          'lg:h-100',
         ])}
       >
-        <Link
-          href="/services"
-          className={clsx([
-            'hover:underline',
-            'flex',
-            'items-center',
-            'gap-1',
-            'pl-5',
-            'lg:pl-0',
-          ])}
-        >
-          <ChevronLeft size={16} /> Services
-        </Link>{' '}
-        / <p>{service.title}</p>
+        <BackgroundImage src={backgroundImage} />
       </div>
 
       <Spacer className={clsx(['h-10', 'md:h-20'])} />
 
-      <p
-        className={clsx(['w-full', 'px-5', 'lg:px-0', 'max-w-5xl', 'mx-auto'])}
-      >
-        {service.summary}
-      </p>
-
       {!!service.description && (
-        <div
-          dangerouslySetInnerHTML={{
-            __html: convertLexicalToHTML({
-              data: service.description,
-              converters: [],
-            }),
-          }}
-        />
-      )}
+        <>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: await convertLexicalToHTML({
+                data: service.description,
+                converters: [],
+              }),
+            }}
+          />
 
-      <Spacer className={clsx(['h-10', 'md:h-20'])} />
+          <Spacer className={clsx(['h-10', 'md:h-20'])} />
+        </>
+      )}
     </main>
   );
 };
