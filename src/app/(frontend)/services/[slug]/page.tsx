@@ -1,7 +1,6 @@
-import { BackgroundImage } from '@/components';
+import { BackgroundImage, RichText } from '@/components';
 import { Spacer } from '@/components/pageComponents';
 import config from '@payload-config';
-import { convertLexicalToHTML } from '@payloadcms/richtext-lexical';
 import clsx from 'clsx';
 import { ChevronLeft } from 'lucide-react';
 import type { Metadata } from 'next';
@@ -102,10 +101,10 @@ const ServicesPage: FC<PageProps> = async ({ params }) => {
         <h1
           className={clsx([
             'px-5',
-            'text-3xl',
+            'text-5xl',
             'text-primary-3',
             'w-fit',
-            'md:text-5xl',
+            'md:text-7xl',
             'lg:px-0',
           ])}
         >
@@ -140,17 +139,32 @@ const ServicesPage: FC<PageProps> = async ({ params }) => {
         <BackgroundImage src={backgroundImage} />
       </div>
 
-      <Spacer className={clsx(['h-10', 'md:h-20'])} />
+      <Spacer className="h-5" />
 
       {!!service.description && (
         <>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: await convertLexicalToHTML({
-                data: service.description,
-                converters: [],
-              }),
-            }}
+          <RichText
+            data={service.description}
+            className={clsx([
+              'flex',
+              'flex-col',
+              'gap-5',
+              'w-full',
+              'max-w-5xl',
+              'mx-auto',
+              'px-5',
+              'lg:px-0',
+              '[&_h2]:text-3xl',
+              '[&_h2]:md:text-5xl',
+              '[&_h2]:text-primary-3',
+              '[&_h3]:text-xl',
+              '[&_h3]:md:text-3xl',
+              '[&_h3]:text-primary-3',
+              '[&_ul]:list-disc',
+              '[&_ul]:pl-5',
+              '[&_ol]:list-decimal',
+              '[&_ol]:pl-5',
+            ])}
           />
 
           <Spacer className={clsx(['h-10', 'md:h-20'])} />
