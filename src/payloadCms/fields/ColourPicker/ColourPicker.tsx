@@ -6,39 +6,6 @@ import { type ChangeEventHandler, useEffect, useRef, useState } from 'react';
 import { HexAlphaColorPicker } from 'react-colorful';
 import styles from './ColourPicker.module.css';
 
-const rgbaToHexAlpha = (r: number, g: number, b: number, a: number): string => {
-  const hex = (value: number) => {
-    const hexValue = value.toString(16);
-    return hexValue.length === 1 ? `0${hexValue}` : hexValue;
-  };
-
-  return `#${hex(r)}${hex(g)}${hex(b)}${hex(Math.round(a * 255))}`;
-};
-
-const hexAlphaToRgba = (
-  hex = '',
-):
-  | {
-      r: number;
-      g: number;
-      b: number;
-      a: number;
-    }
-  | undefined => {
-  const match = hex.match(
-    /^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i,
-  );
-
-  if (!match) return undefined;
-
-  return {
-    r: parseInt(match[1], 16),
-    g: parseInt(match[2], 16),
-    b: parseInt(match[3], 16),
-    a: parseInt(match[4], 16) / 255,
-  };
-};
-
 export const ColourPicker: TextFieldClientComponent = ({
   field,
   path,
@@ -58,7 +25,7 @@ export const ColourPicker: TextFieldClientComponent = ({
 
     if (!newValue) {
       setValue(undefined);
-      
+
       return;
     }
 
