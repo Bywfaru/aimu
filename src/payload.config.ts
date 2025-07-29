@@ -7,7 +7,13 @@ import path from 'path';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
 import { fileURLToPath } from 'url';
-import { Media, Services, Users } from './collections';
+import {
+  Homepage,
+  Media,
+  Pages,
+  Services,
+  Users,
+} from './payloadCms/collections';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -19,7 +25,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Services, Users, Media],
+  collections: [Homepage, Media, Pages, Services, Users],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

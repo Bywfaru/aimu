@@ -1,0 +1,22 @@
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.colourCodesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.rgbaContainer {
+    display: flex;
+    gap: 5px;
+}
+
+@media (min-width: 768px) {
+    .inputContainer {
+        flex-direction: row;
+    }
+}

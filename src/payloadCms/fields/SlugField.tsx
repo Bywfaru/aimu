@@ -1,13 +1,18 @@
 'use client';
 
 import { FieldLabel, TextInput, useField } from '@payloadcms/ui';
-import type { TextFieldClientComponent } from 'payload';
-import type { ChangeEventHandler } from 'react';
+import type { TextFieldClientProps } from 'payload';
+import type { ChangeEventHandler, FC } from 'react';
 
-export const SlugField: TextFieldClientComponent = ({
+export type SlugFieldProps = TextFieldClientProps & {
+  allowDirectories?: boolean;
+};
+
+export const SlugField: FC<SlugFieldProps> = ({
   field,
   path,
   readOnly,
+  allowDirectories,
 }) => {
   const { label } = field;
 
@@ -17,7 +22,15 @@ export const SlugField: TextFieldClientComponent = ({
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const { value: newValue } = event.target;
-    const slug = newValue.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    const slug = allowDirectories
+      ? newValue
+          .toLowerCase()
+          .replace(/[^a-z0-9/-]+/g, '')
+          .replace(/\/+/g, '/')
+      : newValue
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-|-$/g, '');
 
     setValue(slug);
   };
