@@ -1,6 +1,8 @@
 'use client';
 
 import { FieldLabel, TextInput, useField } from '@payloadcms/ui';
+import clsx from 'clsx';
+import { X } from 'lucide-react';
 import type { TextFieldClientComponent } from 'payload';
 import { type ChangeEventHandler, useEffect, useRef, useState } from 'react';
 import { HexAlphaColorPicker } from 'react-colorful';
@@ -17,14 +19,16 @@ export const ColourPicker: TextFieldClientComponent = ({
     path: path || field.name,
   });
 
-  const [colourHexAlpha, setColourHexAlpha] = useState<string | undefined>();
+  const [colourHexAlpha, setColourHexAlpha] = useState<
+    string | null | undefined
+  >();
   const setValueTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const { value: newValue } = event.target;
 
     if (!newValue) {
-      setValue(undefined);
+      setValue(null);
 
       return;
     }
@@ -36,6 +40,8 @@ export const ColourPicker: TextFieldClientComponent = ({
 
     setValue(`#${hexCode}`);
   };
+
+  const handleClear = () => setValue(null);
 
   // Debounce the colour change to avoid rapid updates
   useEffect(() => {
@@ -69,20 +75,42 @@ export const ColourPicker: TextFieldClientComponent = ({
 
       <div className={styles.inputContainer}>
         <HexAlphaColorPicker
-          color={colourHexAlpha}
+          color={colourHexAlpha ?? undefined}
           onChange={setColourHexAlpha}
         />
 
         <div className={styles.colourCodesContainer}>
           <FieldLabel label="Hex Alpha" />
 
-          <TextInput
-            value={value}
-            onChange={handleInputChange}
-            path={path || field.name}
-            readOnly={Boolean(readOnly)}
-            description={field.admin?.description}
-          />
+          <div className="relative">
+            <TextInput
+              value={value}
+              onChange={handleInputChange}
+              path={path || field.name}
+              readOnly={Boolean(readOnly)}
+              description={field.admin?.description}
+            />
+
+            <button
+              type="button"
+              className={clsx([
+                'absolute',
+                'border-none',
+                'top-1/2',
+                'right-3.75',
+                '-translate-y-1/2',
+                'bg-transparent',
+                'cursor-pointer',
+                'flex',
+                'items-center',
+                'justify-center',
+              ])}
+              aria-label="Clear colour"
+              onClick={handleClear}
+            >
+              <X size={16} />
+            </button>
+          </div>
         </div>
       </div>
     </div>

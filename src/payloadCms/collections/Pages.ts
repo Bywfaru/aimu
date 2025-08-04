@@ -16,6 +16,9 @@ export const Pages: CollectionConfig = {
     read: () => true,
     delete: () => false,
   },
+  admin: {
+    useAsTitle: 'title',
+  },
   fields: [
     {
       name: 'title',

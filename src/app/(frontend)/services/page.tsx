@@ -1,7 +1,6 @@
 import { PageTitleSection, Spacer } from '@/components/pageComponents';
 import { ServicesCardsList } from '@/components/pageComponents/servicesPage/ServicesCardsList';
 import config from '@payload-config';
-import clsx from 'clsx';
 import type { Metadata } from 'next';
 import { getPayload } from 'payload';
 import { type FC } from 'react';
@@ -26,11 +25,11 @@ const ServicesPage: FC = async () => {
         title="Services & Treatments"
         backgroundImage="/images/pexels-kpaukshtite-3242264.jpg"
       />
-      <Spacer className={clsx(['h-10', 'md:h-20'])} />
+      <Spacer mobileHeight={40} tabletHeight={80} />
 
       <ServicesCardsList services={services} />
 
-      <Spacer className={clsx(['h-10', 'md:h-20'])} />
+      <Spacer mobileHeight={40} tabletHeight={80} />
     </main>
   );
 };

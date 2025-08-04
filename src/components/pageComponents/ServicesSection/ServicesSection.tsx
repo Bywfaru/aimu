@@ -50,7 +50,12 @@ export const ServicesSection: FC<ServicesSectionProps> = ({
               </h2>
             )}
 
-            {!!content && <RichText data={content} />}
+            {!!content && (
+              <RichText
+                data={content}
+                className={clsx(['flex', 'flex-col', 'gap-3'])}
+              />
+            )}
           </div>
         </div>
 

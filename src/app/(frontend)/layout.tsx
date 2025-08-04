@@ -54,22 +54,26 @@ const dinPro = localFont({
   variable: '--font-dinPro',
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: 'Aimu',
-    template: '%s | Aimu',
-  },
-  description:
-    'Aimu is a wellness spa in Richmond, BC, Canada, offering a range of services including massage therapy, acupuncture, and more to promote postpartum recovery and overall wellness.',
-  openGraph: {
-    type: 'website',
-    title: 'Aimu',
-    images: [
-      {
-        url: 'https://cdn.williamhe.xyz/aimu_og.jpg',
-      },
-    ],
-  },
+export const generateMetadata = async (): Promise<Metadata> => {
+  const payload = await getPayload({ config });
+  const settings = await payload.findGlobal({ slug: 'settings' });
+
+  return {
+    title: {
+      default: settings.siteTitle,
+      template: `%s | ${settings.siteTitle}`,
+    },
+    description: settings.siteDescription,
+    openGraph: {
+      type: 'website',
+      title: settings.siteTitle,
+      images: [
+        {
+          url: 'https://cdn.williamhe.xyz/aimu_og.jpg',
+        },
+      ],
+    },
+  };
 };
 
 const RootLayout: FC<PropsWithChildren> = async ({ children }) => {

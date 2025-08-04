@@ -70,7 +70,7 @@ const ServicesPage: FC<PageProps> = async ({ params }) => {
 
   return (
     <main>
-      <Spacer className="h-5" />
+      <Spacer mobileHeight={20} />
 
       <div
         className={clsx([
@@ -95,7 +95,7 @@ const ServicesPage: FC<PageProps> = async ({ params }) => {
         </p>
       </div>
 
-      <Spacer className={clsx(['h-5', 'lg:h-10'])} />
+      <Spacer mobileHeight={20} desktopHeight={40} />
 
       <div className={clsx(['w-full', 'max-w-5xl', 'mx-auto'])}>
         <h1
@@ -124,7 +124,7 @@ const ServicesPage: FC<PageProps> = async ({ params }) => {
         </p>
       </div>
 
-      <Spacer className="h-5" />
+      <Spacer mobileHeight={20} />
 
       <div
         className={clsx([
@@ -139,7 +139,7 @@ const ServicesPage: FC<PageProps> = async ({ params }) => {
         <BackgroundImage src={backgroundImage} />
       </div>
 
-      <Spacer className="h-5" />
+      <Spacer mobileHeight={20} />
 
       {!!service.description && (
         <>
@@ -167,7 +167,7 @@ const ServicesPage: FC<PageProps> = async ({ params }) => {
             ])}
           />
 
-          <Spacer className={clsx(['h-10', 'md:h-20'])} />
+          <Spacer mobileHeight={40} tabletHeight={80} />
         </>
       )}
     </main>
