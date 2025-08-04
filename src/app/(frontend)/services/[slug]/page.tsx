@@ -66,7 +66,7 @@ const ServicesPage: FC<PageProps> = async ({ params }) => {
     ? typeof media.item === 'string'
       ? media.item
       : (media.item.url ?? '')
-    : '/images/pexels-kpaukshtite-3242264.jpg';
+    : '';
 
   return (
     <main>

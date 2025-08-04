@@ -26,7 +26,7 @@ export const BackgroundImage: FC<BackgroundImageProps> = ({
   loading = 'lazy',
   objectFit = 'cover',
   objectPosition = 'center',
-  quality = 100,
+  quality = 95,
   zIndex = -1,
 }) => {
   return (
