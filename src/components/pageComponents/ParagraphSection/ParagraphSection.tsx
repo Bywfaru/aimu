@@ -10,9 +10,14 @@ export type ParagraphSectionProps = {
   content?: RichTextProps['data'] | null;
   backgroundColor?: string | null;
   textAlign?: 'left' | 'center' | 'right' | 'justify' | null;
-  showButton?: boolean;
-  buttonText?: string | null;
-  buttonLink?: string | null;
+  button?: {
+    visible?: boolean | null;
+    text?: string | null;
+    link?: string | null;
+    color?: string | null;
+    textColor?: string | null;
+  } | null;
+  contentColor?: string | null;
 };
 
 export const ParagraphSection: FC<ParagraphSectionProps> = ({
@@ -20,9 +25,8 @@ export const ParagraphSection: FC<ParagraphSectionProps> = ({
   content,
   title,
   textAlign,
-  showButton,
-  buttonText,
-  buttonLink,
+  button,
+  contentColor,
 }) => {
   return (
     <section
@@ -49,17 +53,21 @@ export const ParagraphSection: FC<ParagraphSectionProps> = ({
           </h2>
         )}
 
-        <div className={clsx(['flex', 'flex-col', 'items-center', 'gap-5'])}>
+        <div
+          className={clsx(['flex', 'flex-col', 'items-center', 'gap-5'])}
+          style={{ color: contentColor ?? undefined }}
+        >
           {!!content && (
             <RichText
               data={content}
               className={clsx(['flex', 'flex-col', 'gap-5', 'md:items-center'])}
+              style={{ color: contentColor ?? undefined }}
             />
           )}
 
-          {!!showButton && (
-            <Link href={buttonLink ?? '#'} className="w-fit">
-              <Button variant="primary">{buttonText}</Button>
+          {!!button?.visible && (
+            <Link href={button.link ?? '#'} className="w-fit">
+              <Button variant="primary">{button.text}</Button>
             </Link>
           )}
         </div>

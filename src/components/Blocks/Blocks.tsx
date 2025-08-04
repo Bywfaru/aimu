@@ -37,9 +37,7 @@ export const Blocks: FC<BlocksProps> = ({
                 title={block.title}
                 content={block.content}
                 contentBackgroundColor={block.contentBackgroundColor}
-                showButton={!!block.showButton}
-                buttonText={block.buttonText}
-                buttonLink={block.buttonLink}
+                button={block.button}
               />
             );
           case 'services':
@@ -99,6 +97,8 @@ export const Blocks: FC<BlocksProps> = ({
               />
             );
           case 'paragraph':
+            console.log('contentColor', block.contentColor);
+
             return (
               <ParagraphSection
                 key={block.id}
@@ -106,9 +106,8 @@ export const Blocks: FC<BlocksProps> = ({
                 content={block.content}
                 backgroundColor={block.backgroundColor}
                 textAlign={block.textAlign}
-                showButton={!!block.showButton}
-                buttonText={block.buttonText}
-                buttonLink={block.buttonLink}
+                button={block.button}
+                contentColor={block.contentColor}
               />
             );
           default:

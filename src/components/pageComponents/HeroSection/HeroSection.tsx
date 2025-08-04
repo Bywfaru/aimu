@@ -17,19 +17,21 @@ export type HeroSectionProps = {
   title?: RichTextProps['data'] | null;
   content?: RichTextProps['data'] | null;
   contentBackgroundColor?: string | null;
-  showButton?: boolean;
-  buttonText?: string | null;
-  buttonLink?: string | null;
+  button?: {
+    visible?: boolean | null;
+    text?: string | null;
+    link?: string | null;
+    color?: string | null;
+    textColor?: string | null;
+  } | null;
 };
 
 export const HeroSection: FC<HeroSectionProps> = ({
   backgroundImage,
   title,
   content,
-  buttonText,
-  showButton,
   contentBackgroundColor,
-  buttonLink,
+  button,
 }) => {
   const backgroundImageUrl = useMedia(backgroundImage);
 
@@ -72,9 +74,9 @@ export const HeroSection: FC<HeroSectionProps> = ({
             {!!content && <RichText data={content} className="text-xl" />}
           </div>
 
-          {!!showButton && (
-            <Link href={buttonLink ?? '#'} className="w-fit">
-              <Button>{buttonText}</Button>
+          {!!button?.visible && (
+            <Link href={button.link ?? '#'} className="w-fit">
+              <Button>{button.text}</Button>
             </Link>
           )}
         </div>

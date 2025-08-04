@@ -215,9 +215,13 @@ export interface Page {
               };
               [k: string]: unknown;
             } | null;
-            showButton?: boolean | null;
-            buttonText?: string | null;
-            buttonLink?: string | null;
+            button?: {
+              visible?: boolean | null;
+              text?: string | null;
+              color?: string | null;
+              textColor?: string | null;
+              link?: string | null;
+            };
             backgroundImage: string | Media;
             contentBackgroundColor?: string | null;
             id?: string | null;
@@ -262,9 +266,13 @@ export interface Page {
               };
               [k: string]: unknown;
             } | null;
-            showButton?: boolean | null;
-            buttonText?: string | null;
-            buttonLink?: string | null;
+            button?: {
+              visible?: boolean | null;
+              text?: string | null;
+              color?: string | null;
+              textColor?: string | null;
+              link?: string | null;
+            };
             media: string | Media;
             backgroundColor?: string | null;
             contentBackgroundColor?: string | null;
@@ -303,11 +311,14 @@ export interface Page {
               };
               [k: string]: unknown;
             } | null;
-            showButton?: boolean | null;
-            buttonText?: string | null;
-            buttonColor?: string | null;
-            buttonTextColor?: string | null;
-            buttonLink?: string | null;
+            contentColor?: string | null;
+            button?: {
+              visible?: boolean | null;
+              text?: string | null;
+              color?: string | null;
+              textColor?: string | null;
+              link?: string | null;
+            };
             textAlign?: ('left' | 'right' | 'center' | 'justify') | null;
             backgroundColor?: string | null;
             id?: string | null;
@@ -345,9 +356,13 @@ export interface Page {
               };
               [k: string]: unknown;
             } | null;
-            showButton?: boolean | null;
-            buttonText?: string | null;
-            buttonLink?: string | null;
+            button?: {
+              visible?: boolean | null;
+              text?: string | null;
+              color?: string | null;
+              textColor?: string | null;
+              link?: string | null;
+            };
             media: string | Media;
             textPosition?: ('left' | 'right') | null;
             backgroundColor?: string | null;
@@ -386,9 +401,13 @@ export interface Page {
               };
               [k: string]: unknown;
             } | null;
-            showButton?: boolean | null;
-            buttonText?: string | null;
-            buttonLink?: string | null;
+            button?: {
+              visible?: boolean | null;
+              text?: string | null;
+              color?: string | null;
+              textColor?: string | null;
+              link?: string | null;
+            };
             backgroundColor?: string | null;
             id?: string | null;
             blockName?: string | null;
@@ -575,9 +594,15 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               title?: T;
               content?: T;
-              showButton?: T;
-              buttonText?: T;
-              buttonLink?: T;
+              button?:
+                | T
+                | {
+                    visible?: T;
+                    text?: T;
+                    color?: T;
+                    textColor?: T;
+                    link?: T;
+                  };
               backgroundImage?: T;
               contentBackgroundColor?: T;
               id?: T;
@@ -596,9 +621,15 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               title?: T;
               content?: T;
-              showButton?: T;
-              buttonText?: T;
-              buttonLink?: T;
+              button?:
+                | T
+                | {
+                    visible?: T;
+                    text?: T;
+                    color?: T;
+                    textColor?: T;
+                    link?: T;
+                  };
               media?: T;
               backgroundColor?: T;
               contentBackgroundColor?: T;
@@ -610,11 +641,16 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               title?: T;
               content?: T;
-              showButton?: T;
-              buttonText?: T;
-              buttonColor?: T;
-              buttonTextColor?: T;
-              buttonLink?: T;
+              contentColor?: T;
+              button?:
+                | T
+                | {
+                    visible?: T;
+                    text?: T;
+                    color?: T;
+                    textColor?: T;
+                    link?: T;
+                  };
               textAlign?: T;
               backgroundColor?: T;
               id?: T;
@@ -625,9 +661,15 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               title?: T;
               content?: T;
-              showButton?: T;
-              buttonText?: T;
-              buttonLink?: T;
+              button?:
+                | T
+                | {
+                    visible?: T;
+                    text?: T;
+                    color?: T;
+                    textColor?: T;
+                    link?: T;
+                  };
               media?: T;
               textPosition?: T;
               backgroundColor?: T;
@@ -639,9 +681,15 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               title?: T;
               content?: T;
-              showButton?: T;
-              buttonText?: T;
-              buttonLink?: T;
+              button?:
+                | T
+                | {
+                    visible?: T;
+                    text?: T;
+                    color?: T;
+                    textColor?: T;
+                    link?: T;
+                  };
               backgroundColor?: T;
               id?: T;
               blockName?: T;
@@ -811,9 +859,13 @@ export interface Homepage {
               };
               [k: string]: unknown;
             } | null;
-            showButton?: boolean | null;
-            buttonText?: string | null;
-            buttonLink?: string | null;
+            button?: {
+              visible?: boolean | null;
+              text?: string | null;
+              color?: string | null;
+              textColor?: string | null;
+              link?: string | null;
+            };
             backgroundImage: string | Media;
             contentBackgroundColor?: string | null;
             id?: string | null;
@@ -858,9 +910,13 @@ export interface Homepage {
               };
               [k: string]: unknown;
             } | null;
-            showButton?: boolean | null;
-            buttonText?: string | null;
-            buttonLink?: string | null;
+            button?: {
+              visible?: boolean | null;
+              text?: string | null;
+              color?: string | null;
+              textColor?: string | null;
+              link?: string | null;
+            };
             media: string | Media;
             backgroundColor?: string | null;
             contentBackgroundColor?: string | null;
@@ -899,11 +955,14 @@ export interface Homepage {
               };
               [k: string]: unknown;
             } | null;
-            showButton?: boolean | null;
-            buttonText?: string | null;
-            buttonColor?: string | null;
-            buttonTextColor?: string | null;
-            buttonLink?: string | null;
+            contentColor?: string | null;
+            button?: {
+              visible?: boolean | null;
+              text?: string | null;
+              color?: string | null;
+              textColor?: string | null;
+              link?: string | null;
+            };
             textAlign?: ('left' | 'right' | 'center' | 'justify') | null;
             backgroundColor?: string | null;
             id?: string | null;
@@ -941,9 +1000,13 @@ export interface Homepage {
               };
               [k: string]: unknown;
             } | null;
-            showButton?: boolean | null;
-            buttonText?: string | null;
-            buttonLink?: string | null;
+            button?: {
+              visible?: boolean | null;
+              text?: string | null;
+              color?: string | null;
+              textColor?: string | null;
+              link?: string | null;
+            };
             media: string | Media;
             textPosition?: ('left' | 'right') | null;
             backgroundColor?: string | null;
@@ -982,9 +1045,13 @@ export interface Homepage {
               };
               [k: string]: unknown;
             } | null;
-            showButton?: boolean | null;
-            buttonText?: string | null;
-            buttonLink?: string | null;
+            button?: {
+              visible?: boolean | null;
+              text?: string | null;
+              color?: string | null;
+              textColor?: string | null;
+              link?: string | null;
+            };
             backgroundColor?: string | null;
             id?: string | null;
             blockName?: string | null;
@@ -1099,9 +1166,15 @@ export interface HomepageSelect<T extends boolean = true> {
           | {
               title?: T;
               content?: T;
-              showButton?: T;
-              buttonText?: T;
-              buttonLink?: T;
+              button?:
+                | T
+                | {
+                    visible?: T;
+                    text?: T;
+                    color?: T;
+                    textColor?: T;
+                    link?: T;
+                  };
               backgroundImage?: T;
               contentBackgroundColor?: T;
               id?: T;
@@ -1120,9 +1193,15 @@ export interface HomepageSelect<T extends boolean = true> {
           | {
               title?: T;
               content?: T;
-              showButton?: T;
-              buttonText?: T;
-              buttonLink?: T;
+              button?:
+                | T
+                | {
+                    visible?: T;
+                    text?: T;
+                    color?: T;
+                    textColor?: T;
+                    link?: T;
+                  };
               media?: T;
               backgroundColor?: T;
               contentBackgroundColor?: T;
@@ -1134,11 +1213,16 @@ export interface HomepageSelect<T extends boolean = true> {
           | {
               title?: T;
               content?: T;
-              showButton?: T;
-              buttonText?: T;
-              buttonColor?: T;
-              buttonTextColor?: T;
-              buttonLink?: T;
+              contentColor?: T;
+              button?:
+                | T
+                | {
+                    visible?: T;
+                    text?: T;
+                    color?: T;
+                    textColor?: T;
+                    link?: T;
+                  };
               textAlign?: T;
               backgroundColor?: T;
               id?: T;
@@ -1149,9 +1233,15 @@ export interface HomepageSelect<T extends boolean = true> {
           | {
               title?: T;
               content?: T;
-              showButton?: T;
-              buttonText?: T;
-              buttonLink?: T;
+              button?:
+                | T
+                | {
+                    visible?: T;
+                    text?: T;
+                    color?: T;
+                    textColor?: T;
+                    link?: T;
+                  };
               media?: T;
               textPosition?: T;
               backgroundColor?: T;
@@ -1163,9 +1253,15 @@ export interface HomepageSelect<T extends boolean = true> {
           | {
               title?: T;
               content?: T;
-              showButton?: T;
-              buttonText?: T;
-              buttonLink?: T;
+              button?:
+                | T
+                | {
+                    visible?: T;
+                    text?: T;
+                    color?: T;
+                    textColor?: T;
+                    link?: T;
+                  };
               backgroundColor?: T;
               id?: T;
               blockName?: T;
