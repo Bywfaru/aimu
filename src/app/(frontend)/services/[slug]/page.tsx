@@ -34,6 +34,8 @@ export const generateMetadata = async ({ params }: PageProps) => {
   } satisfies Metadata;
 };
 
+export const dynamicParams = true;
+
 export const generateStaticParams = async () => {
   const payload = await getPayload({ config });
   const services = await payload

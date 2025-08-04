@@ -34,7 +34,7 @@ export const Nav: GlobalConfig = {
                 new URL(`https://example.com${value}`);
 
                 return true; // Valid relative path
-              } catch (error) {
+              } catch (_error) {
                 return 'Invalid relative path format';
               }
             }
@@ -43,7 +43,7 @@ export const Nav: GlobalConfig = {
               new URL(value);
 
               return true; // Valid absolute URL
-            } catch (error) {
+            } catch (_error) {
               return 'Invalid URL format';
             }
           },

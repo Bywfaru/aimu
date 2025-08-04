@@ -97,8 +97,6 @@ export const Blocks: FC<BlocksProps> = ({
               />
             );
           case 'paragraph':
-            console.log('contentColor', block.contentColor);
-
             return (
               <ParagraphSection
                 key={block.id}

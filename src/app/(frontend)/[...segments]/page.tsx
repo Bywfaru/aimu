@@ -13,6 +13,24 @@ type PageProps = {
   }>;
 };
 
+export const dynamicParams = true;
+
+export const generateStaticParams = async () => {
+  const payload = await getPayload({ config });
+  const pages = await payload.find({
+    collection: 'pages',
+    select: {
+      slug: true,
+      title: true,
+      description: true,
+    },
+  });
+
+  return pages.docs.map((doc) => ({
+    segments: doc.slug.split('/'),
+  }));
+};
+
 export const generateMetadata = async ({
   params,
 }: PageProps): Promise<Metadata> => {
