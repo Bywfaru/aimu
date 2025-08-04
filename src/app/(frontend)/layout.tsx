@@ -4,10 +4,12 @@ import {
   Navbar,
   type NavbarLinkItem,
 } from '@/components';
+import config from '@payload-config';
 import clsx from 'clsx';
 import type { Metadata } from 'next';
 import './globals.css';
 import localFont from 'next/font/local';
+import { getPayload } from 'payload';
 import type { FC, PropsWithChildren } from 'react';
 
 const brolian = localFont({
@@ -70,49 +72,24 @@ export const metadata: Metadata = {
   },
 };
 
-const navLinks: NavbarLinkItem[] = [
-  {
-    href: '/',
-    label: 'Home',
-  },
-  {
-    href: '/about-us',
-    label: 'About Us',
-  },
-  {
-    href: '/services',
-    label: 'Services',
-  },
-  {
-    href: '/testimonials',
-    label: 'Testimonials',
-  },
-];
+const RootLayout: FC<PropsWithChildren> = async ({ children }) => {
+  const payload = await getPayload({ config });
+  const [nav, footer, settings] = await Promise.all([
+    payload.findGlobal({ slug: 'nav' }),
+    payload.findGlobal({ slug: 'footer' }),
+    payload.findGlobal({ slug: 'settings' }),
+  ]);
+  const navLinks: NavbarLinkItem[] =
+    nav?.items?.map((item) => ({
+      label: item.label,
+      href: item.url,
+    })) ?? [];
+  const footerLinks: FooterLinkItem[] =
+    footer?.items?.map((item) => ({
+      label: item.label,
+      href: item.url,
+    })) ?? [];
 
-const footerLinks: FooterLinkItem[] = [
-  {
-    href: '/',
-    label: 'Home',
-  },
-  {
-    href: '/services',
-    label: 'Services',
-  },
-  {
-    href: '/book',
-    label: 'Booking',
-  },
-  {
-    href: '/testimonials',
-    label: 'Testimonials & Reviews',
-  },
-  {
-    href: '/about-us',
-    label: 'About Us',
-  },
-];
-
-const RootLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <html lang="en">
       <body
@@ -125,10 +102,13 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
         <Footer
           links={footerLinks}
           contact={{
-            email: 'info@aimuyvr.com',
+            email: settings?.contactEmail,
           }}
           socialMedia={{
-            instagram: 'https://www.instagram.com/aimuyvr',
+            instagram: settings?.socialMedia?.instagram ?? '',
+            facebook: settings?.socialMedia?.facebook ?? '',
+            twitter: settings?.socialMedia?.x ?? '',
+            whatsapp: settings?.socialMedia?.whatsapp ?? '',
           }}
         />
       </body>

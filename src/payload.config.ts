@@ -1,19 +1,17 @@
 // storage-adapter-import-placeholder
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud';
-import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import {
+  defaultEditorFeatures,
+  lexicalEditor,
+} from '@payloadcms/richtext-lexical';
 import { s3Storage } from '@payloadcms/storage-s3';
 import path from 'path';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
 import { fileURLToPath } from 'url';
-import {
-  Homepage,
-  Media,
-  Pages,
-  Services,
-  Users,
-} from './payloadCms/collections';
+import { Media, Pages, Services, Users } from './payloadCms/collections';
+import { Footer, Homepage, Nav, Settings } from './payloadCms/globals';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -25,8 +23,11 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Homepage, Media, Pages, Services, Users],
-  editor: lexicalEditor(),
+  globals: [Footer, Homepage, Nav, Settings],
+  collections: [Media, Pages, Services, Users],
+  editor: lexicalEditor({
+    features: [...defaultEditorFeatures],
+  }),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

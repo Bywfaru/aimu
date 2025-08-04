@@ -1,11 +1,38 @@
 'use client';
 
-import { BackgroundImage, Button } from '@/components';
+import {
+  BackgroundImage,
+  Button,
+  RichText,
+  type RichTextProps,
+} from '@/components';
+import { useMedia } from '@/hooks';
+import type { Media } from '@/payload-types';
 import clsx from 'clsx';
 import Link from 'next/link';
-import type { FC } from 'react';
+import { type FC } from 'react';
 
-export const HeroSection: FC = () => {
+export type HeroSectionProps = {
+  backgroundImage: string | Media;
+  title?: RichTextProps['data'] | null;
+  content?: RichTextProps['data'] | null;
+  contentBackgroundColor?: string | null;
+  showButton?: boolean;
+  buttonText?: string | null;
+  buttonLink?: string | null;
+};
+
+export const HeroSection: FC<HeroSectionProps> = ({
+  backgroundImage,
+  title,
+  content,
+  buttonText,
+  showButton,
+  contentBackgroundColor,
+  buttonLink,
+}) => {
+  const backgroundImageUrl = useMedia(backgroundImage);
+
   return (
     <section
       className={clsx([
@@ -19,10 +46,7 @@ export const HeroSection: FC = () => {
         'md:min-h-[calc(80vh-150px)]',
       ])}
     >
-      <BackgroundImage
-        src="/images/pexels-yankrukov-7155632.jpg"
-        loading="eager"
-      />
+      <BackgroundImage src={backgroundImageUrl} loading="eager" />
 
       <div className={clsx(['w-full', 'max-w-5xl', 'mx-auto'])}>
         <div
@@ -31,27 +55,28 @@ export const HeroSection: FC = () => {
             'py-10',
             'flex',
             'flex-col',
-            'bg-accent-3/90',
             'backdrop-blur-sm',
             'max-w-2/3',
             'gap-5',
             'md:max-w-xl',
           ])}
+          style={{ backgroundColor: contentBackgroundColor ?? undefined }}
         >
           <div className={clsx(['flex', 'flex-col', 'gap-3'])}>
-            <h2 className={clsx(['text-5xl', 'text-primary-3', 'max-w-2/3'])}>
-              Post&shy;partum wellness redefined
-            </h2>
+            {!!title && (
+              <h2 className={clsx(['text-5xl', 'text-primary-3', 'max-w-2/3'])}>
+                <RichText data={title} />
+              </h2>
+            )}
 
-            <p className={clsx(['text-xl'])}>
-              Give us a visit and discover how we can take your recovery to the
-              next level.
-            </p>
+            {!!content && <RichText data={content} className="text-xl" />}
           </div>
 
-          <Link href="/book" className="w-fit">
-            <Button>BOOK NOW</Button>
-          </Link>
+          {!!showButton && (
+            <Link href={buttonLink ?? '#'} className="w-fit">
+              <Button>{buttonText}</Button>
+            </Link>
+          )}
         </div>
       </div>
     </section>

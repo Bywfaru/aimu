@@ -1,18 +1,26 @@
-import { BackgroundImage } from '@/components';
+import { BackgroundImage, RichText, type RichTextProps } from '@/components';
+import { useMedia } from '@/hooks';
+import type { Media } from '@/payload-types';
 import clsx from 'clsx';
-import type { FC, ReactNode } from 'react';
+import { type FC } from 'react';
 
 export type ParagraphOverImageProps = {
-  title: string;
-  content: ReactNode;
-  image: string;
+  title?: RichTextProps['data'] | null;
+  content?: RichTextProps['data'] | null;
+  image: string | Media;
+  contentBackgroundColor?: string | null;
+  textAlign?: 'left' | 'center' | 'right' | 'justify' | null;
 };
 
 export const ParagraphOverImage: FC<ParagraphOverImageProps> = ({
   image,
   content,
   title,
+  contentBackgroundColor,
+  textAlign,
 }) => {
+  const backgroundImageUrl = useMedia(image);
+
   return (
     <section className="w-full">
       <div
@@ -25,7 +33,7 @@ export const ParagraphOverImage: FC<ParagraphOverImageProps> = ({
           'md:py-20',
         ])}
       >
-        <BackgroundImage src={image} />
+        <BackgroundImage src={backgroundImageUrl} />
 
         <div
           className={clsx([
@@ -35,15 +43,23 @@ export const ParagraphOverImage: FC<ParagraphOverImageProps> = ({
             'gap-3',
             'max-w-lg',
             'mx-auto',
-            'bg-accent-3/90',
             'backdrop-blur-sm',
             'px-5',
             'py-8',
+            { 'text-left': textAlign === 'left' },
+            { 'text-center': textAlign === 'center' },
+            { 'text-right': textAlign === 'right' },
+            { 'text-justify': textAlign === 'justify' },
           ])}
+          style={{ backgroundColor: contentBackgroundColor ?? undefined }}
         >
-          <h2 className={clsx(['text-4xl', 'text-primary-3'])}>{title}</h2>
+          {!!title && (
+            <h2 className={clsx(['text-4xl', 'text-primary-3'])}>
+              <RichText data={title} />
+            </h2>
+          )}
 
-          {content}
+          {!!content && <RichText data={content} />}
         </div>
       </div>
     </section>

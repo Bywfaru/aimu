@@ -1,14 +1,15 @@
 'use client';
 
-import { BackgroundImage, Button } from '@/components';
+import { Button, RichText, type RichTextProps } from '@/components';
+import { ServicesSectionItem } from '@/components/pageComponents/ServicesSection/components';
 import { Service } from '@/payload-types';
 import clsx from 'clsx';
 import Link from 'next/link';
-import type { FC, ReactNode } from 'react';
+import type { FC } from 'react';
 
 export type ServicesSectionProps = {
-  title: string;
-  content: ReactNode;
+  title?: RichTextProps['data'] | null;
+  content?: RichTextProps['data'] | null;
   services: Service[];
 };
 
@@ -41,11 +42,15 @@ export const ServicesSection: FC<ServicesSectionProps> = ({
           ])}
         >
           <div className={clsx(['flex', 'flex-col', 'gap-3'])}>
-            <h2 className={clsx(['text-4xl', 'text-primary-3', 'text-center'])}>
-              {title}
-            </h2>
+            {!!title && (
+              <h2
+                className={clsx(['text-4xl', 'text-primary-3', 'text-center'])}
+              >
+                <RichText data={title} />
+              </h2>
+            )}
 
-            {content}
+            {!!content && <RichText data={content} />}
           </div>
         </div>
 
@@ -58,70 +63,9 @@ export const ServicesSection: FC<ServicesSectionProps> = ({
             'justify-stretch',
           ])}
         >
-          {services.map((service) => {
-            const media = service.media?.[0];
-
-            return (
-              <Link
-                key={service.id}
-                href={`/services/${service.slug}`}
-                className={clsx(['group'])}
-              >
-                <div
-                  className={clsx([
-                    'flex',
-                    'flex-col',
-                    'p-5',
-                    'justify-end',
-                    'relative',
-                    'h-75',
-                    'text-text-light',
-                    'text-2xl',
-                  ])}
-                >
-                  <BackgroundImage
-                    src={
-                      typeof media?.item === 'string'
-                        ? media.item
-                        : (media?.item.url ?? '')
-                    }
-                    imageClassName={clsx([
-                      'group-hover:scale-105',
-                      'transition',
-                    ])}
-                  />
-
-                  <div
-                    className={clsx([
-                      'absolute',
-                      'size-full',
-                      'top-0',
-                      'left-0',
-                      'bg-black/60',
-                      'z-[-1]',
-                      'md:bg-black/0',
-                      'md:group-hover:bg-black/60',
-                      'transition',
-                      'group-hover:backdrop-blur-xs',
-                    ])}
-                  ></div>
-
-                  <p className={clsx(['uppercase'])}>{service.title}</p>
-
-                  <div
-                    className={clsx([
-                      'overflow-hidden',
-                      'md:max-h-0',
-                      'md:group-hover:max-h-50',
-                      'transition-all',
-                    ])}
-                  >
-                    <Button className={clsx(['mt-5'])}>LEARN MORE</Button>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
+          {services.map((service) => (
+            <ServicesSectionItem key={service.id} service={service} />
+          ))}
         </div>
 
         <Link href="/services" className="w-fit">

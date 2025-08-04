@@ -1,16 +1,20 @@
 import { BackgroundImage } from '@/components';
+import { useMedia } from '@/hooks';
+import type { Media } from '@/payload-types';
 import clsx from 'clsx';
-import type { FC } from 'react';
+import { type FC } from 'react';
 
 export type PageTitleSectionProps = {
-  title: string;
-  backgroundImage: string;
+  title?: string | null;
+  backgroundImage: string | Media;
 };
 
 export const PageTitleSection: FC<PageTitleSectionProps> = ({
   backgroundImage,
   title,
 }) => {
+  const backgroundImageUrl = useMedia(backgroundImage);
+
   return (
     <section
       className={clsx([
@@ -24,7 +28,7 @@ export const PageTitleSection: FC<PageTitleSectionProps> = ({
         'lg:px-0',
       ])}
     >
-      <BackgroundImage src={backgroundImage} />
+      <BackgroundImage src={backgroundImageUrl} />
 
       <div className={clsx(['w-full', 'max-w-5xl', 'mx-auto'])}>
         <h1

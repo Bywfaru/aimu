@@ -1,12 +1,14 @@
-import { BackgroundImage } from '@/components';
+import { BackgroundImage, RichText, type RichTextProps } from '@/components';
+import { useMedia } from '@/hooks';
+import type { Media } from '@/payload-types';
 import clsx from 'clsx';
-import type { FC, ReactNode } from 'react';
+import type { FC } from 'react';
 
 export type ParagraphImageSectionProps = {
-  title: string;
-  content: ReactNode;
-  image: string;
-  backgroundColor?: string;
+  title?: RichTextProps['data'] | null;
+  content?: RichTextProps['data'] | null;
+  image: string | Media;
+  backgroundColor?: string | null;
   reverse?: boolean;
 };
 
@@ -17,6 +19,8 @@ export const ParagraphImageSection: FC<ParagraphImageSectionProps> = ({
   title,
   reverse = false,
 }) => {
+  const imageUrl = useMedia(image);
+
   return (
     <section
       className={clsx([
@@ -28,7 +32,7 @@ export const ParagraphImageSection: FC<ParagraphImageSectionProps> = ({
         'md:items-stretch',
         reverse ? 'md:flex-row-reverse' : 'md:flex-row',
       ])}
-      style={{ backgroundColor }}
+      style={{ backgroundColor: backgroundColor ?? undefined }}
     >
       <div
         className={clsx([
@@ -52,9 +56,17 @@ export const ParagraphImageSection: FC<ParagraphImageSectionProps> = ({
             'md:py-20',
           ])}
         >
-          <h2 className={clsx(['text-4xl', 'text-primary-3'])}>{title}</h2>
+          {!!title && (
+            <h2 className={clsx(['text-4xl', 'text-primary-3'])}>
+              <RichText data={title} />
+            </h2>
+          )}
 
-          <div className="text-justify">{content}</div>
+          {!!content && (
+            <div className="text-justify">
+              <RichText data={content} />
+            </div>
+          )}
         </div>
       </div>
 
@@ -67,7 +79,7 @@ export const ParagraphImageSection: FC<ParagraphImageSectionProps> = ({
           'md:h-auto',
         ])}
       >
-        <BackgroundImage src={image} zIndex={0} />
+        <BackgroundImage src={imageUrl} zIndex={0} />
       </div>
     </section>
   );

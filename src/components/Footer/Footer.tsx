@@ -158,7 +158,7 @@ export const Footer: FC<FooterProps> = ({
                     </a>
                   )}
                   {!!socialMedia.whatsapp && (
-                    <a href={socialMedia.whatsapp}>
+                    <a href={`tel:${socialMedia.whatsapp}`}>
                       <SiWhatsapp size={24} />
                     </a>
                   )}

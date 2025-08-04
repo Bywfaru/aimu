@@ -67,7 +67,6 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    homepage: Homepage;
     media: Media;
     pages: Page;
     services: Service;
@@ -78,7 +77,6 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    homepage: HomepageSelect<false> | HomepageSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     services: ServicesSelect<false> | ServicesSelect<true>;
@@ -90,8 +88,18 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    footer: Footer;
+    homepage: Homepage;
+    nav: Nav;
+    settings: Setting;
+  };
+  globalsSelect: {
+    footer: FooterSelect<false> | FooterSelect<true>;
+    homepage: HomepageSelect<false> | HomepageSelect<true>;
+    nav: NavSelect<false> | NavSelect<true>;
+    settings: SettingsSelect<false> | SettingsSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -118,259 +126,6 @@ export interface UserAuthOperations {
     email: string;
     password: string;
   };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "homepage".
- */
-export interface Homepage {
-  id: string;
-  blocks?:
-    | (
-        | {
-            title?: string | null;
-            content?: {
-              root: {
-                type: string;
-                children: {
-                  type: string;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'googleReviewsCarousel';
-          }
-        | {
-            title?: {
-              root: {
-                type: string;
-                children: {
-                  type: string;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            content?: {
-              root: {
-                type: string;
-                children: {
-                  type: string;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            showButton?: boolean | null;
-            buttonText?: string | null;
-            buttonLink?: string | null;
-            backgroundImage: string | Media;
-            contentBackgroundColor?: string | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'hero';
-          }
-        | {
-            title?: string | null;
-            backgroundImage: string | Media;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'pageTitle';
-          }
-        | {
-            title?: {
-              root: {
-                type: string;
-                children: {
-                  type: string;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            content?: {
-              root: {
-                type: string;
-                children: {
-                  type: string;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            showButton?: boolean | null;
-            buttonText?: string | null;
-            buttonLink?: string | null;
-            media: string | Media;
-            backgroundColor?: string | null;
-            contentBackgroundColor?: string | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'paragraphOverMedia';
-          }
-        | {
-            title?: {
-              root: {
-                type: string;
-                children: {
-                  type: string;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            content?: {
-              root: {
-                type: string;
-                children: {
-                  type: string;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            showButton?: boolean | null;
-            buttonText?: string | null;
-            buttonColor?: string | null;
-            buttonTextColor?: string | null;
-            buttonLink?: string | null;
-            textAlign?: ('left' | 'right' | 'center' | 'justify') | null;
-            backgroundColor?: string | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'paragraph';
-          }
-        | {
-            title?: {
-              root: {
-                type: string;
-                children: {
-                  type: string;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            content?: {
-              root: {
-                type: string;
-                children: {
-                  type: string;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            showButton?: boolean | null;
-            buttonText?: string | null;
-            buttonLink?: string | null;
-            media: string | Media;
-            textPosition?: ('left' | 'right') | null;
-            backgroundColor?: string | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'paragraphWithMedia';
-          }
-        | {
-            title?: {
-              root: {
-                type: string;
-                children: {
-                  type: string;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            content?: {
-              root: {
-                type: string;
-                children: {
-                  type: string;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            showButton?: boolean | null;
-            buttonText?: string | null;
-            buttonLink?: string | null;
-            backgroundColor?: string | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'services';
-          }
-        | {
-            mobileHeight: number;
-            tabletHeight?: number | null;
-            desktopHeight?: number | null;
-            backgroundColor?: string | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'spacer';
-          }
-      )[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -721,10 +476,6 @@ export interface PayloadLockedDocument {
   id: string;
   document?:
     | ({
-        relationTo: 'homepage';
-        value: string | Homepage;
-      } | null)
-    | ({
         relationTo: 'media';
         value: string | Media;
       } | null)
@@ -781,112 +532,6 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "homepage_select".
- */
-export interface HomepageSelect<T extends boolean = true> {
-  blocks?:
-    | T
-    | {
-        googleReviewsCarousel?:
-          | T
-          | {
-              title?: T;
-              content?: T;
-              id?: T;
-              blockName?: T;
-            };
-        hero?:
-          | T
-          | {
-              title?: T;
-              content?: T;
-              showButton?: T;
-              buttonText?: T;
-              buttonLink?: T;
-              backgroundImage?: T;
-              contentBackgroundColor?: T;
-              id?: T;
-              blockName?: T;
-            };
-        pageTitle?:
-          | T
-          | {
-              title?: T;
-              backgroundImage?: T;
-              id?: T;
-              blockName?: T;
-            };
-        paragraphOverMedia?:
-          | T
-          | {
-              title?: T;
-              content?: T;
-              showButton?: T;
-              buttonText?: T;
-              buttonLink?: T;
-              media?: T;
-              backgroundColor?: T;
-              contentBackgroundColor?: T;
-              id?: T;
-              blockName?: T;
-            };
-        paragraph?:
-          | T
-          | {
-              title?: T;
-              content?: T;
-              showButton?: T;
-              buttonText?: T;
-              buttonColor?: T;
-              buttonTextColor?: T;
-              buttonLink?: T;
-              textAlign?: T;
-              backgroundColor?: T;
-              id?: T;
-              blockName?: T;
-            };
-        paragraphWithMedia?:
-          | T
-          | {
-              title?: T;
-              content?: T;
-              showButton?: T;
-              buttonText?: T;
-              buttonLink?: T;
-              media?: T;
-              textPosition?: T;
-              backgroundColor?: T;
-              id?: T;
-              blockName?: T;
-            };
-        services?:
-          | T
-          | {
-              title?: T;
-              content?: T;
-              showButton?: T;
-              buttonText?: T;
-              buttonLink?: T;
-              backgroundColor?: T;
-              id?: T;
-              blockName?: T;
-            };
-        spacer?:
-          | T
-          | {
-              mobileHeight?: T;
-              tabletHeight?: T;
-              desktopHeight?: T;
-              backgroundColor?: T;
-              id?: T;
-              blockName?: T;
-            };
-      };
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1086,6 +731,495 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: string;
+  items?:
+    | {
+        label: string;
+        /**
+         * Enter a URL or a relative path (e.g., /about)
+         */
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage".
+ */
+export interface Homepage {
+  id: string;
+  blocks?:
+    | (
+        | {
+            title?: string | null;
+            content?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'googleReviewsCarousel';
+          }
+        | {
+            title?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            content?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            showButton?: boolean | null;
+            buttonText?: string | null;
+            buttonLink?: string | null;
+            backgroundImage: string | Media;
+            contentBackgroundColor?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero';
+          }
+        | {
+            title?: string | null;
+            backgroundImage: string | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'pageTitle';
+          }
+        | {
+            title?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            content?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            showButton?: boolean | null;
+            buttonText?: string | null;
+            buttonLink?: string | null;
+            media: string | Media;
+            backgroundColor?: string | null;
+            contentBackgroundColor?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'paragraphOverMedia';
+          }
+        | {
+            title?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            content?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            showButton?: boolean | null;
+            buttonText?: string | null;
+            buttonColor?: string | null;
+            buttonTextColor?: string | null;
+            buttonLink?: string | null;
+            textAlign?: ('left' | 'right' | 'center' | 'justify') | null;
+            backgroundColor?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'paragraph';
+          }
+        | {
+            title?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            content?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            showButton?: boolean | null;
+            buttonText?: string | null;
+            buttonLink?: string | null;
+            media: string | Media;
+            textPosition?: ('left' | 'right') | null;
+            backgroundColor?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'paragraphWithMedia';
+          }
+        | {
+            title?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            content?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            showButton?: boolean | null;
+            buttonText?: string | null;
+            buttonLink?: string | null;
+            backgroundColor?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'services';
+          }
+        | {
+            mobileHeight: number;
+            tabletHeight?: number | null;
+            desktopHeight?: number | null;
+            backgroundColor?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'spacer';
+          }
+      )[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "nav".
+ */
+export interface Nav {
+  id: string;
+  items?:
+    | {
+        label: string;
+        /**
+         * Enter a URL or a relative path (e.g., /about)
+         */
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings".
+ */
+export interface Setting {
+  id: string;
+  /**
+   * The title of the website, displayed in the browser tab and as the main heading.
+   */
+  siteTitle: string;
+  /**
+   * A brief description of the website, used for SEO and social media sharing.
+   */
+  siteDescription: string;
+  /**
+   * Email address for site contact or inquiries.
+   */
+  contactEmail: string;
+  socialMedia?: {
+    /**
+     * Link to the Instagram profile.
+     */
+    instagram?: string | null;
+    /**
+     * Link to the Facebook page.
+     */
+    facebook?: string | null;
+    /**
+     * Link to the X profile.
+     */
+    x?: string | null;
+    /**
+     * Phone number for WhatsApp contact, formatted as +1234567890.
+     */
+    whatsapp?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage_select".
+ */
+export interface HomepageSelect<T extends boolean = true> {
+  blocks?:
+    | T
+    | {
+        googleReviewsCarousel?:
+          | T
+          | {
+              title?: T;
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
+        hero?:
+          | T
+          | {
+              title?: T;
+              content?: T;
+              showButton?: T;
+              buttonText?: T;
+              buttonLink?: T;
+              backgroundImage?: T;
+              contentBackgroundColor?: T;
+              id?: T;
+              blockName?: T;
+            };
+        pageTitle?:
+          | T
+          | {
+              title?: T;
+              backgroundImage?: T;
+              id?: T;
+              blockName?: T;
+            };
+        paragraphOverMedia?:
+          | T
+          | {
+              title?: T;
+              content?: T;
+              showButton?: T;
+              buttonText?: T;
+              buttonLink?: T;
+              media?: T;
+              backgroundColor?: T;
+              contentBackgroundColor?: T;
+              id?: T;
+              blockName?: T;
+            };
+        paragraph?:
+          | T
+          | {
+              title?: T;
+              content?: T;
+              showButton?: T;
+              buttonText?: T;
+              buttonColor?: T;
+              buttonTextColor?: T;
+              buttonLink?: T;
+              textAlign?: T;
+              backgroundColor?: T;
+              id?: T;
+              blockName?: T;
+            };
+        paragraphWithMedia?:
+          | T
+          | {
+              title?: T;
+              content?: T;
+              showButton?: T;
+              buttonText?: T;
+              buttonLink?: T;
+              media?: T;
+              textPosition?: T;
+              backgroundColor?: T;
+              id?: T;
+              blockName?: T;
+            };
+        services?:
+          | T
+          | {
+              title?: T;
+              content?: T;
+              showButton?: T;
+              buttonText?: T;
+              buttonLink?: T;
+              backgroundColor?: T;
+              id?: T;
+              blockName?: T;
+            };
+        spacer?:
+          | T
+          | {
+              mobileHeight?: T;
+              tabletHeight?: T;
+              desktopHeight?: T;
+              backgroundColor?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "nav_select".
+ */
+export interface NavSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings_select".
+ */
+export interface SettingsSelect<T extends boolean = true> {
+  siteTitle?: T;
+  siteDescription?: T;
+  contactEmail?: T;
+  socialMedia?:
+    | T
+    | {
+        instagram?: T;
+        facebook?: T;
+        x?: T;
+        whatsapp?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

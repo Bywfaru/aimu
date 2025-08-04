@@ -1,0 +1,16 @@
+.spacer {
+    width: 100%;
+    height: var(--spacer-height-mobile, 0);
+}
+
+@media (min-width: 768px) {
+    .spacer {
+        height: var(--spacer-height-tablet, 0);
+    }
+}
+
+@media (min-width: 1024px) {
+    .spacer {
+        height: var(--spacer-height-desktop, 0);
+    }
+}

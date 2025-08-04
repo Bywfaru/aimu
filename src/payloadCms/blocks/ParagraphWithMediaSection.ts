@@ -56,7 +56,7 @@ export const ParagraphWithMediaSection: Block = {
       name: 'media',
       type: 'upload',
       relationTo: 'media',
-      required: true,
+      required: true
     },
     {
       name: 'textPosition',

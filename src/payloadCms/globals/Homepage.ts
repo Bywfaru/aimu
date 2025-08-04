@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload';
+import type { GlobalConfig } from 'payload';
 import {
   GoogleReviewsCarouselSection,
   HeroSection,
@@ -10,16 +10,11 @@ import {
   SpacerSection,
 } from '../blocks';
 
-export const Homepage: CollectionConfig = {
+export const Homepage: GlobalConfig = {
   slug: 'homepage',
-  labels: {
-    singular: 'Homepage',
-    plural: 'Homepage',
-  },
+  label: 'Homepage',
   access: {
     read: () => true,
-    delete: () => false,
-    create: () => false,
   },
   fields: [
     {

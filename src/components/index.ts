@@ -4,3 +4,4 @@ export * from './Footer';
 export * from './Navbar';
 export * from './CarouselNavigationButton';
 export * from './RichText';
+export * from './Blocks';
