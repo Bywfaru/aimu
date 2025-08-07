@@ -14,7 +14,6 @@ export const Pages: CollectionConfig = {
   slug: 'pages',
   access: {
     read: () => true,
-    delete: () => false,
   },
   admin: {
     useAsTitle: 'title',
