@@ -5,6 +5,7 @@ import {
   type NavbarLinkItem,
 } from '@/components';
 import config from '@payload-config';
+import { Analytics } from '@vercel/analytics/next';
 import clsx from 'clsx';
 import type { Metadata } from 'next';
 import './globals.css';
@@ -115,6 +116,8 @@ const RootLayout: FC<PropsWithChildren> = async ({ children }) => {
             whatsapp: settings?.socialMedia?.whatsapp ?? '',
           }}
         />
+
+        <Analytics />
       </body>
     </html>
   );
