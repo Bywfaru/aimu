@@ -31,7 +31,12 @@ export const Services: CollectionConfig = {
       },
       admin: {
         components: {
-          Field: '/payloadCms/fields/SlugField#SlugField',
+          Field: {
+            path: '/payloadCms/fields/SlugField#SlugField',
+            clientProps: {
+              basePath: '/services',
+            },
+          },
         },
         description:
           'The URL-friendly identifier for this service. It should be lowercase and can only contain letters, numbers, and hyphens. e.g., "belly-binding" would be accessible through /services/belly-binding.',

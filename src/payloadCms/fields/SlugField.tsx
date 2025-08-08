@@ -12,6 +12,7 @@ import { useIsClient } from 'usehooks-ts';
 
 export type SlugFieldProps = TextFieldClientProps & {
   allowDirectories?: boolean;
+  basePath?: string;
 };
 
 export const SlugField: FC<SlugFieldProps> = ({
@@ -19,6 +20,7 @@ export const SlugField: FC<SlugFieldProps> = ({
   path,
   readOnly,
   allowDirectories,
+  basePath = '',
 }) => {
   const { label } = field;
 
@@ -67,7 +69,7 @@ export const SlugField: FC<SlugFieldProps> = ({
       {!!slug && typeof window !== 'undefined' && (
         <FieldDescription
           path={path || field.name}
-          description={`Your page will be accessible through: ${window.location.origin}/${slug}`}
+          description={`Your page will be accessible through: ${window.location.origin}${basePath}/${slug}`}
         />
       )}
     </div>
