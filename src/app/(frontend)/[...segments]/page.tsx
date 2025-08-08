@@ -69,7 +69,7 @@ const DynamicPage: FC<PageProps> = async ({ params }) => {
     payload.find({
       collection: 'pages',
       where: {
-        slug: { equals: slug },
+        slug: { equals: slug.startsWith('/') ? slug : `/${slug}` },
       },
       limit: 1,
       select: {
