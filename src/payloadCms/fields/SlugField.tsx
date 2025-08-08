@@ -1,8 +1,14 @@
 'use client';
 
-import { FieldLabel, TextInput, useField } from '@payloadcms/ui';
+import {
+  FieldDescription,
+  FieldLabel,
+  TextInput,
+  useField,
+} from '@payloadcms/ui';
 import type { TextFieldClientProps } from 'payload';
-import type { ChangeEventHandler, FC } from 'react';
+import { type ChangeEventHandler, type FC, useMemo } from 'react';
+import { useIsClient } from 'usehooks-ts';
 
 export type SlugFieldProps = TextFieldClientProps & {
   allowDirectories?: boolean;
@@ -19,6 +25,13 @@ export const SlugField: FC<SlugFieldProps> = ({
   const { value, setValue } = useField<string>({
     path: path || field.name,
   });
+  const isClient = useIsClient();
+
+  const slug = useMemo(() => {
+    if (!value || !isClient) return null;
+
+    return value.startsWith('/') ? value.slice(1) : value;
+  }, [isClient, value]);
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const { value: newValue } = event.target;
@@ -32,7 +45,7 @@ export const SlugField: FC<SlugFieldProps> = ({
           .replace(/[^a-z0-9]+/g, '-')
           .replace(/^-|-$/g, '');
 
-    setValue(slug);
+    setValue(slug.startsWith('/') ? slug : `/${slug}`);
   };
 
   return (
@@ -50,6 +63,13 @@ export const SlugField: FC<SlugFieldProps> = ({
         readOnly={Boolean(readOnly)}
         description={field.admin?.description}
       />
+
+      {!!slug && typeof window !== 'undefined' && (
+        <FieldDescription
+          path={path || field.name}
+          description={`Your page will be accessible through: ${window.location.origin}/${slug}`}
+        />
+      )}
     </div>
   );
 };

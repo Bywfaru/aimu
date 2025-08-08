@@ -34,7 +34,7 @@ export const Pages: CollectionConfig = {
         if (!value) return 'Slug is required.';
         if (value.startsWith('-') || value.endsWith('-'))
           return 'Slug cannot start or end with a hyphen.';
-        if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value))
+        if (!/^[a-z0-9\/]+(?:-[a-z0-9\/]+)*$/.test(value))
           return 'Slug must be lowercase and can only contain letters, numbers, and hyphens.';
 
         return true;
@@ -49,7 +49,7 @@ export const Pages: CollectionConfig = {
           },
         },
         description:
-          'The URL-friendly identifier for this page. It should be lowercase and can only contain letters, numbers, and hyphens.',
+          'The URL-friendly identifier for this page. It should be lowercase and can only contain letters, numbers, slashes (/), and hyphens (-).',
       },
     },
     {

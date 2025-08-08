@@ -26,9 +26,13 @@ export const generateStaticParams = async () => {
     },
   });
 
-  return pages.docs.map((doc) => ({
-    segments: doc.slug.split('/'),
-  }));
+  return pages.docs.map((doc) => {
+    const slug = doc.slug.startsWith('/') ? doc.slug.slice(1) : doc.slug;
+
+    return {
+      segments: slug.split('/'),
+    };
+  });
 };
 
 export const generateMetadata = async ({
@@ -40,7 +44,7 @@ export const generateMetadata = async ({
   const pages = await payload.find({
     collection: 'pages',
     where: {
-      slug: { equals: slug },
+      slug: { equals: slug.startsWith('/') ? slug : `/${slug}` },
     },
     limit: 1,
     select: {

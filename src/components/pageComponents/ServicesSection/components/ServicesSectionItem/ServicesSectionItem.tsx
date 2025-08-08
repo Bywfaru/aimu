@@ -16,7 +16,7 @@ export const ServicesSectionItem: FC<ServicesSectionItemProps> = ({
   const backgroundImageUrl = useMedia(media?.item);
 
   return (
-    <Link href={`/services/${service.slug}`} className={clsx(['group'])}>
+    <Link href={`/services${service.slug}`} className={clsx(['group'])}>
       <div
         className={clsx([
           'flex',

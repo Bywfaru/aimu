@@ -13,7 +13,7 @@ export const ServicesCard: FC<ServicesCardProps> = ({ service }) => {
 
   return (
     <Link
-      href={`/services/${service.slug}`}
+      href={`/services${service.slug}`}
       key={service.id}
       className={clsx([
         'w-full',

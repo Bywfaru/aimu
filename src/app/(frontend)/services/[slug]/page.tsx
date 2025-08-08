@@ -20,7 +20,7 @@ export const generateMetadata = async ({ params }: PageProps) => {
   const services = await payload.find({
     collection: 'services',
     where: {
-      slug: { equals: slug },
+      slug: { equals: slug.startsWith('/') ? slug : `/${slug}` },
     },
     limit: 1,
     select: {
@@ -47,9 +47,15 @@ export const generateStaticParams = async () => {
     })
     .then((result) => result.docs);
 
-  return services.map((service) => ({
-    slug: service.slug,
-  }));
+  return services.map((service) => {
+    const slug = service.slug.startsWith('/')
+      ? service.slug.slice(1)
+      : service.slug;
+
+    return {
+      slug,
+    };
+  });
 };
 
 const ServicesPage: FC<PageProps> = async ({ params }) => {
@@ -58,7 +64,7 @@ const ServicesPage: FC<PageProps> = async ({ params }) => {
   const services = await payload.find({
     collection: 'services',
     where: {
-      slug: { equals: slug },
+      slug: { equals: slug.startsWith('/') ? slug : `/${slug}` },
     },
     limit: 1,
   });

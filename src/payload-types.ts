@@ -154,7 +154,7 @@ export interface Page {
   id: string;
   title: string;
   /**
-   * The URL-friendly identifier for this page. It should be lowercase and can only contain letters, numbers, and hyphens.
+   * The URL-friendly identifier for this page. It should be lowercase and can only contain letters, numbers, slashes (/), and hyphens (-).
    */
   slug: string;
   /**
