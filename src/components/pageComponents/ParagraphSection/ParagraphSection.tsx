@@ -60,7 +60,7 @@ export const ParagraphSection: FC<ParagraphSectionProps> = ({
           {!!content && (
             <RichText
               data={content}
-              className={clsx(['flex', 'flex-col', 'gap-5', 'md:items-center'])}
+              className="md:items-center"
               style={{ color: contentColor ?? undefined }}
             />
           )}
