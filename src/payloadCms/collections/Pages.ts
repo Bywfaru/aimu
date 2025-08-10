@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload';
 import {
+  GoogleReviewsCardsSection,
   GoogleReviewsCarouselSection,
   HeroSection,
   PageTitleSection,
@@ -64,6 +65,7 @@ export const Pages: CollectionConfig = {
       name: 'blocks',
       type: 'blocks',
       blocks: [
+        GoogleReviewsCardsSection,
         GoogleReviewsCarouselSection,
         HeroSection,
         PageTitleSection,

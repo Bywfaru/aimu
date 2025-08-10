@@ -55,7 +55,12 @@ export const Blocks: FC<BlocksProps> = ({
             if (!googleReviews?.length) return null;
 
             return (
-              <GoogleReviewsCarousel key={block.id} reviews={googleReviews} />
+              <GoogleReviewsCarousel
+                key={block.id}
+                title={block.title}
+                content={block.content}
+                reviews={googleReviews}
+              />
             );
           case 'paragraphOverMedia':
             return (

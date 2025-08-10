@@ -6,3 +6,4 @@ export * from './ParagraphSection';
 export * from './ParagraphWithMediaSection';
 export * from './ServicesSection';
 export * from './SpacerSection';
+export * from './GoogleReviewsCardsSection';

@@ -1,5 +1,6 @@
 import type { GlobalConfig } from 'payload';
 import {
+  GoogleReviewsCardsSection,
   GoogleReviewsCarouselSection,
   HeroSection,
   PageTitleSection,
@@ -21,6 +22,7 @@ export const Homepage: GlobalConfig = {
       name: 'blocks',
       type: 'blocks',
       blocks: [
+        GoogleReviewsCardsSection,
         GoogleReviewsCarouselSection,
         HeroSection,
         PageTitleSection,
