@@ -1,22 +1,29 @@
 'use client';
 
-import { CarouselNavigationButton } from '@/components';
+import {
+  CarouselNavigationButton,
+  RichText,
+  type RichTextProps,
+} from '@/components';
 import clsx from 'clsx';
 import { type places_v1 } from 'googleapis';
 import { type FC, useState } from 'react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, type SwiperProps, SwiperSlide } from 'swiper/react';
-
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { GoogleReviewCard } from './components';
 import 'swiper/css/pagination';
 
 export type GoogleReviewsCarouselProps = {
+  title?: RichTextProps['data'] | null;
+  content?: RichTextProps['data'] | null;
   reviews?: places_v1.Schema$GoogleMapsPlacesV1Review[];
 };
 
 export const GoogleReviewsCarousel: FC<GoogleReviewsCarouselProps> = ({
+  title,
+  content,
   reviews = [],
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -38,7 +45,37 @@ export const GoogleReviewsCarousel: FC<GoogleReviewsCarouselProps> = ({
         'gap-5',
       ])}
     >
-      <div className={clsx(['w-full', 'max-w-3xl', 'mx-auto', 'px-5'])}>
+      <div
+        className={clsx([
+          'w-full',
+          'max-w-3xl',
+          'mx-auto',
+          'px-5',
+          'flex',
+          'flex-col',
+          'items-center',
+          'gap-5',
+        ])}
+      >
+        <div className={clsx(['flex', 'flex-col', 'gap-3'])}>
+          {
+            !!title(
+              <h2
+                className={clsx(['text-4xl', 'text-primary-3', 'text-center'])}
+              >
+                <RichText data={title} />
+              </h2>,
+            )
+          }
+
+          {!!content && (
+            <RichText
+              data={content}
+              className={clsx(['flex', 'flex-col', 'gap-3'])}
+            />
+          )}
+        </div>
+
         <Swiper
           onSlideChange={handleSlideChange}
           modules={[Navigation, Pagination]}
@@ -55,6 +92,7 @@ export const GoogleReviewsCarousel: FC<GoogleReviewsCarouselProps> = ({
             '!flex',
             'flex-col',
             'gap-5',
+            'w-full',
           ])}
         >
           <CarouselNavigationButton

@@ -9,7 +9,7 @@ export const GoogleReviewsCarouselSection: Block = {
   fields: [
     {
       name: 'title',
-      type: 'text',
+      type: 'richText',
     },
     {
       name: 'content',
