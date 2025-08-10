@@ -9,7 +9,8 @@ import {
   ParagraphWithMediaSection,
   ServicesSection,
   SpacerSection,
-} from '../blocks';
+} from '../../blocks';
+import { afterChange } from './hooks';
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -18,6 +19,12 @@ export const Pages: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
+  },
+  hooks: {
+    afterChange: [afterChange],
+  },
+  versions: {
+    drafts: true,
   },
   fields: [
     {

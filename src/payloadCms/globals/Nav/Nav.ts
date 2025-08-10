@@ -1,10 +1,17 @@
 import type { GlobalConfig } from 'payload';
+import { afterChange } from './hooks';
 
-export const Footer: GlobalConfig = {
-  slug: 'footer',
-  label: 'Footer',
+export const Nav: GlobalConfig = {
+  slug: 'nav',
+  label: 'Navigation',
   access: {
     read: () => true, // Allow public read access
+  },
+  hooks: {
+    afterChange: [afterChange],
+  },
+  versions: {
+    drafts: true,
   },
   fields: [
     {

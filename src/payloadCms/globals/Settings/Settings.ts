@@ -1,10 +1,17 @@
 import type { GlobalConfig } from 'payload';
+import { afterChange } from './hooks';
 
 export const Settings: GlobalConfig = {
   slug: 'settings',
   label: 'Settings',
   access: {
     read: () => true, // Allow public read access
+  },
+  hooks: {
+    afterChange: [afterChange],
+  },
+  versions: {
+    drafts: true,
   },
   fields: [
     {

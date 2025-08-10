@@ -9,13 +9,20 @@ import {
   ParagraphWithMediaSection,
   ServicesSection,
   SpacerSection,
-} from '../blocks';
+} from '../../blocks';
+import { afterChange } from './hooks';
 
 export const Homepage: GlobalConfig = {
   slug: 'homepage',
   label: 'Homepage',
   access: {
     read: () => true,
+  },
+  hooks: {
+    afterChange: [afterChange],
+  },
+  versions: {
+    drafts: true,
   },
   fields: [
     {

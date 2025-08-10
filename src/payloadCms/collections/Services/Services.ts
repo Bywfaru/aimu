@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload';
+import { afterChange } from './hooks';
 
 export const Services: CollectionConfig = {
   slug: 'services',
@@ -7,6 +8,12 @@ export const Services: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
+  },
+  hooks: {
+    afterChange: [afterChange],
+  },
+  versions: {
+    drafts: true,
   },
   fields: [
     {
