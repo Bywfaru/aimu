@@ -196,6 +196,41 @@ export interface Page {
             } | null;
             id?: string | null;
             blockName?: string | null;
+            blockType: 'googleReviewsCards';
+          }
+        | {
+            title?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            content?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
             blockType: 'googleReviewsCarousel';
           }
         | {
@@ -595,6 +630,14 @@ export interface PagesSelect<T extends boolean = true> {
   blocks?:
     | T
     | {
+        googleReviewsCards?:
+          | T
+          | {
+              title?: T;
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
         googleReviewsCarousel?:
           | T
           | {
@@ -821,6 +864,41 @@ export interface Homepage {
   id: string;
   blocks?:
     | (
+        | {
+            title?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            content?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'googleReviewsCards';
+          }
         | {
             title?: {
               root: {
@@ -1181,6 +1259,14 @@ export interface HomepageSelect<T extends boolean = true> {
   blocks?:
     | T
     | {
+        googleReviewsCards?:
+          | T
+          | {
+              title?: T;
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
         googleReviewsCarousel?:
           | T
           | {

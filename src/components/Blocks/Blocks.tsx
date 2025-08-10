@@ -1,4 +1,6 @@
 import {
+  GoogleReviewsCards,
+  GoogleReviewsCarousel,
   HeroSection,
   PageTitleSection,
   ParagraphImageSection,
@@ -7,7 +9,6 @@ import {
   ServicesSection,
   Spacer,
 } from '@/components/pageComponents';
-import { GoogleReviewsCarousel } from '@/components/pageComponents/testimonialsPage';
 import type { Page, Service } from '@/payload-types';
 import type { places_v1 } from 'googleapis';
 import type { FC } from 'react';
@@ -49,6 +50,17 @@ export const Blocks: FC<BlocksProps> = ({
                 title={block.title}
                 content={block.content}
                 services={services}
+              />
+            );
+          case 'googleReviewsCards':
+            if (!googleReviews?.length) return null;
+
+            return (
+              <GoogleReviewsCards
+                key={block.id}
+                title={block.title}
+                content={block.content}
+                reviews={googleReviews}
               />
             );
           case 'googleReviewsCarousel':

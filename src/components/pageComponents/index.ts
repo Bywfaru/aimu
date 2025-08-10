@@ -6,3 +6,5 @@ export * from './PageTitleSection';
 export * from './Spacer';
 export * from './ParagraphOverImage';
 export * from './BookingWidget';
+export * from './GoogleReviewsCarousel';
+export * from './GoogleReviewsCards';

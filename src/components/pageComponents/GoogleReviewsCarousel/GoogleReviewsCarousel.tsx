@@ -58,15 +58,11 @@ export const GoogleReviewsCarousel: FC<GoogleReviewsCarouselProps> = ({
         ])}
       >
         <div className={clsx(['flex', 'flex-col', 'gap-3'])}>
-          {
-            !!title(
-              <h2
-                className={clsx(['text-4xl', 'text-primary-3', 'text-center'])}
-              >
-                <RichText data={title} />
-              </h2>,
-            )
-          }
+          {!!title && (
+            <h2 className={clsx(['text-4xl', 'text-primary-3', 'text-center'])}>
+              <RichText data={title} />
+            </h2>
+          )}
 
           {!!content && (
             <RichText
