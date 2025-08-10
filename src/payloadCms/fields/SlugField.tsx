@@ -37,17 +37,12 @@ export const SlugField: FC<SlugFieldProps> = ({
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const { value: newValue } = event.target;
-    const slug = allowDirectories
-      ? newValue
-          .toLowerCase()
-          .replace(/[^a-z0-9/-]+/g, '')
-          .replace(/\/+/g, '/')
-      : newValue
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, '-')
-          .replace(/^-|-$/g, '');
+    let slug = newValue.toLowerCase().replace(/[^a-z0-9/-]+/g, ''); // Replace all non-alphanumeric characters except for hyphens and slashes
 
-    setValue(slug.startsWith('/') ? slug : `/${slug}`);
+    if (!allowDirectories) slug.replace(/\/+/g, ''); // Remove slashes if directories are not allowed
+    if (slug.startsWith('/')) slug = slug.slice(1); // Remove leading slash
+
+    setValue(`/${slug}`);
   };
 
   return (
