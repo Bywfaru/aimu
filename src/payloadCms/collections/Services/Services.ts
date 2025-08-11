@@ -8,6 +8,25 @@ export const Services: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
+    livePreview: {
+      url: ({ data, req }) => {
+        const url = new URL(
+          process.env.NODE_ENV === 'production'
+            ? `https://${req.host}`
+            : req.origin,
+        );
+
+        url.pathname = '/api/draft';
+        url.searchParams.set('secret', process.env.PAYLOAD_SECRET);
+        url.searchParams.set('collection', 'pages');
+        url.searchParams.set(
+          'slug',
+          data.slug.startsWith('/') ? data.slug : `/${data.slug}`,
+        );
+
+        return url.toString();
+      },
+    },
   },
   hooks: {
     afterChange: [afterChange],

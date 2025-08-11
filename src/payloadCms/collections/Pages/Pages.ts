@@ -21,7 +21,11 @@ export const Pages: CollectionConfig = {
     useAsTitle: 'title',
     livePreview: {
       url: ({ data, req }) => {
-        const url = new URL(req.origin);
+        const url = new URL(
+          process.env.NODE_ENV === 'production'
+            ? `https://${req.host}`
+            : req.origin,
+        );
 
         url.pathname = '/api/draft';
         url.searchParams.set('secret', process.env.PAYLOAD_SECRET);
