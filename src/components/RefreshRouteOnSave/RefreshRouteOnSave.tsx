@@ -14,11 +14,7 @@ export const RefreshRouteOnSave: FC = () => {
   return (
     <PayloadLivePreview
       refresh={() => router.refresh()}
-      serverURL={
-        process.env.NODE_ENV === 'production'
-          ? `https://${window.location.hostname}`
-          : window.location.origin
-      }
+      serverURL="https://www.aimuyvr.com"
     />
   );
 };
