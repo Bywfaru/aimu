@@ -14,7 +14,11 @@ export const RefreshRouteOnSave: FC = () => {
   return (
     <PayloadLivePreview
       refresh={() => router.refresh()}
-      serverURL={window.location.origin}
+      serverURL={
+        process.env.NODE_ENV === 'production'
+          ? `https://${window.location.hostname}`
+          : window.location.origin
+      }
     />
   );
 };
