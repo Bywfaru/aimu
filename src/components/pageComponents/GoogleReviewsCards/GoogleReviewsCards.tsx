@@ -3,11 +3,11 @@
 import { RichText, type RichTextProps } from '@/components';
 import clsx from 'clsx';
 import { type places_v1 } from 'googleapis';
-import { type FC } from 'react';
+import { type FC, useMemo } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { GoogleReviewCard } from './components';
 import 'swiper/css/pagination';
+import { GoogleReviewCard } from './components';
 
 export type GoogleReviewsCardsProps = {
   title?: RichTextProps['data'] | null;
@@ -20,6 +20,22 @@ export const GoogleReviewsCards: FC<GoogleReviewsCardsProps> = ({
   content,
   reviews = [],
 }) => {
+  const [reviewsColumn1, reviewsColumn2] = useMemo(() => {
+    if (reviews.length < 2) return [reviews, []];
+
+    return reviews.reduce(
+      (prev, curr, index) => {
+        if (index % 2 === 0) return [[...prev[0], curr], prev[1]];
+
+        return [prev[0], [...prev[1], curr]];
+      },
+      [[], []] as [
+        places_v1.Schema$GoogleMapsPlacesV1Review[],
+        places_v1.Schema$GoogleMapsPlacesV1Review[],
+      ],
+    );
+  }, [reviews]);
+
   if (!reviews.length) return <p>No reviews to show.</p>;
 
   return (
@@ -56,14 +72,30 @@ export const GoogleReviewsCards: FC<GoogleReviewsCardsProps> = ({
           'flex-col',
           'gap-5',
           'px-5',
-          'md:grid',
-          'md:grid-cols-2',
-          'md:gap-y-10',
+          'md:flex-row',
         ])}
       >
-        {reviews.map((review, index) => (
-          <GoogleReviewCard key={`${review.name}_${index}`} review={review} />
-        ))}
+        {!!reviewsColumn1.length && (
+          <div className={clsx(['flex', 'flex-col', 'gap-5', 'md:flex-1'])}>
+            {reviewsColumn1.map((review, index) => (
+              <GoogleReviewCard
+                key={`${review.name}_${index}`}
+                review={review}
+              />
+            ))}
+          </div>
+        )}
+
+        {!!reviewsColumn2.length && (
+          <div className={clsx(['flex', 'flex-col', 'gap-5', 'md:flex-1'])}>
+            {reviewsColumn2.map((review, index) => (
+              <GoogleReviewCard
+                key={`${review.name}_${index}`}
+                review={review}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

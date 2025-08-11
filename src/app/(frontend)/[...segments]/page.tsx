@@ -46,7 +46,7 @@ export const generateMetadata = async ({
     where: {
       slug: { equals: slug.startsWith('/') ? slug : `/${slug}` },
     },
-    limit: 1,
+    limit: 10,
     select: {
       title: true,
       description: true,
