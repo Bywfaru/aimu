@@ -7,6 +7,8 @@ declare global {
       readonly R2_SECRET_ACCESS_KEY: string;
       readonly R2_BUCKET_NAME: string;
       readonly R2_ENDPOINT: string;
+      readonly DATABASE_URI: string;
+      readonly PAYLOAD_SECRET: string;
     }
   }
 }

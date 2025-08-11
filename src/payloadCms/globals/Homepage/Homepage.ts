@@ -24,6 +24,18 @@ export const Homepage: GlobalConfig = {
   versions: {
     drafts: true,
   },
+  admin: {
+    livePreview: {
+      url: ({ req }) => {
+        const url = new URL(req.origin);
+
+        url.pathname = '/api/draft';
+        url.searchParams.set('secret', process.env.PAYLOAD_SECRET);
+
+        return url.toString();
+      },
+    },
+  },
   fields: [
     {
       name: 'blocks',

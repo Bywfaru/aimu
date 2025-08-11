@@ -1,7 +1,9 @@
-import { Blocks } from '@/components';
+import { Blocks, RefreshRouteOnSave } from '@/components';
 import { getGooglePlaceData } from '@/lib/utils';
 import config from '@payload-config';
 import type { Metadata } from 'next';
+import { draftMode } from 'next/headers';
+import { notFound } from 'next/navigation';
 import { getPayload } from 'payload';
 import type { FC } from 'react';
 
@@ -64,7 +66,7 @@ const DynamicPage: FC<PageProps> = async ({ params }) => {
   const { segments } = await params;
   const slug = segments.length === 1 ? segments[0] : `/${segments.join('/')}`;
   const payload = await getPayload({ config });
-
+  const { isEnabled: isDraftModeEnabled } = await draftMode();
   const [pages, services, { reviews }] = await Promise.all([
     payload.find({
       collection: 'pages',
@@ -76,7 +78,9 @@ const DynamicPage: FC<PageProps> = async ({ params }) => {
         title: true,
         description: true,
         blocks: true,
+        _status: true,
       },
+      draft: isDraftModeEnabled,
     }),
     payload.find({
       collection: 'services',
@@ -85,16 +89,22 @@ const DynamicPage: FC<PageProps> = async ({ params }) => {
   ]);
   const [page] = pages.docs;
 
+  if (page._status !== 'published' && !isDraftModeEnabled) notFound();
+
   if (!page?.blocks) return null;
 
   return (
-    <main>
-      <Blocks
-        blocks={page.blocks}
-        services={services.docs}
-        googleReviews={reviews}
-      />
-    </main>
+    <>
+      <RefreshRouteOnSave />
+
+      <main>
+        <Blocks
+          blocks={page.blocks}
+          services={services.docs}
+          googleReviews={reviews}
+        />
+      </main>
+    </>
   );
 };
 

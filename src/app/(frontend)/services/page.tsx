@@ -16,6 +16,9 @@ const ServicesPage: FC = async () => {
   const services = await payload
     .find({
       collection: 'services',
+      where: {
+        _status: { equals: 'published' },
+      },
     })
     .then((result) => result.docs);
 

@@ -13,6 +13,7 @@
     "@gsap/react": "^2.1.2",
     "@icons-pack/react-simple-icons": "^13.4.0",
     "@payloadcms/db-mongodb": "^3.48.0",
+    "@payloadcms/live-preview-react": "3.49.1",
     "@payloadcms/next": "^3.48.0",
     "@payloadcms/payload-cloud": "^3.48.0",
     "@payloadcms/richtext-lexical": "^3.48.0",

@@ -5,3 +5,4 @@ export * from './Navbar';
 export * from './CarouselNavigationButton';
 export * from './RichText';
 export * from './Blocks';
+export * from './RefreshRouteOnSave';
