@@ -22,7 +22,9 @@ export const Homepage: GlobalConfig = {
     afterChange: [afterChange],
   },
   versions: {
-    drafts: true,
+    drafts: {
+      autosave: true,
+    },
   },
   admin: {
     livePreview: {

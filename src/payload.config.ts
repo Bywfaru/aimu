@@ -11,7 +11,13 @@ import { buildConfig } from 'payload';
 import sharp from 'sharp';
 import { fileURLToPath } from 'url';
 import { Media, Pages, Services, Users } from './payloadCms/collections';
-import { Footer, Homepage, Nav, Settings } from './payloadCms/globals';
+import {
+  Footer,
+  Homepage,
+  Nav,
+  ServicesCatalog,
+  Settings,
+} from './payloadCms/globals';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -23,7 +29,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  globals: [Footer, Homepage, Nav, Settings],
+  globals: [Footer, Homepage, Nav, ServicesCatalog, Settings],
   collections: [Media, Pages, Services, Users],
   editor: lexicalEditor({
     features: [...defaultEditorFeatures],

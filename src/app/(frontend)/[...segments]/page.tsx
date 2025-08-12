@@ -67,7 +67,7 @@ const DynamicPage: FC<PageProps> = async ({ params }) => {
   const slug = segments.length === 1 ? segments[0] : `/${segments.join('/')}`;
   const payload = await getPayload({ config });
   const { isEnabled: isDraftModeEnabled } = await draftMode();
-  const [pages, services, { reviews }] = await Promise.all([
+  const [pages, servicesCatalog, { reviews }] = await Promise.all([
     payload.find({
       collection: 'pages',
       where: {
@@ -82,11 +82,25 @@ const DynamicPage: FC<PageProps> = async ({ params }) => {
       },
       draft: isDraftModeEnabled,
     }),
-    payload.find({
-      collection: 'services',
+    payload.findGlobal({
+      slug: 'servicesCatalog',
+      draft: isDraftModeEnabled,
     }),
     getGooglePlaceData(),
   ]);
+  const services = await Promise.all(
+    servicesCatalog?.services?.map(async (service) => {
+      if (typeof service === 'string') {
+        return await payload.findByID({
+          collection: 'services',
+          id: service,
+          draft: isDraftModeEnabled,
+        });
+      }
+
+      return service;
+    }) ?? [],
+  );
   const [page] = pages.docs;
 
   if (page._status !== 'published' && !isDraftModeEnabled) notFound();
@@ -100,7 +114,7 @@ const DynamicPage: FC<PageProps> = async ({ params }) => {
       <main>
         <Blocks
           blocks={page.blocks}
-          services={services.docs}
+          services={services}
           googleReviews={reviews}
         />
       </main>

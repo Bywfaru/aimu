@@ -32,7 +32,9 @@ export const Services: CollectionConfig = {
     afterChange: [afterChange],
   },
   versions: {
-    drafts: true,
+    drafts: {
+      autosave: true,
+    },
   },
   fields: [
     {

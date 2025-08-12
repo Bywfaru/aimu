@@ -7,6 +7,7 @@ export const GET = async (request: Request) => {
   const { searchParams } = new URL(request.url);
   const secret = searchParams.get('secret');
   const collection = searchParams.get('collection');
+  const global = searchParams.get('global');
   const slug = searchParams.get('slug');
 
   if (secret !== process.env.PAYLOAD_SECRET)
@@ -53,6 +54,14 @@ export const GET = async (request: Request) => {
         break;
       default:
         return new Response('Invalid collection', { status: 401 });
+    }
+  } else if (global) {
+    switch (global) {
+      case 'servicesCatalog':
+        pathname = '/services';
+        break;
+      default:
+        pathname = '/';
     }
   }
 

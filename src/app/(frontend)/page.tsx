@@ -10,13 +10,27 @@ export const revalidate = 3600;
 const HomePage: FC = async () => {
   const payload = await getPayload({ config });
   const { isEnabled: isDraftModeEnabled } = await draftMode();
-  const [homepage, services, { reviews }] = await Promise.all([
+  const [homepage, servicesCatalog, { reviews }] = await Promise.all([
     payload.findGlobal({ slug: 'homepage', draft: isDraftModeEnabled }),
-    payload.find({
-      collection: 'services',
+    payload.findGlobal({
+      slug: 'servicesCatalog',
+      draft: isDraftModeEnabled,
     }),
     getGooglePlaceData(),
   ]);
+  const services = await Promise.all(
+    servicesCatalog?.services?.map(async (service) => {
+      if (typeof service === 'string') {
+        return await payload.findByID({
+          collection: 'services',
+          id: service,
+          draft: isDraftModeEnabled,
+        });
+      }
+
+      return service;
+    }) ?? [],
+  );
 
   if (!homepage?.blocks) return null;
 
@@ -27,7 +41,7 @@ const HomePage: FC = async () => {
       <main>
         <Blocks
           blocks={homepage.blocks}
-          services={services.docs}
+          services={services}
           googleReviews={reviews}
         />
       </main>

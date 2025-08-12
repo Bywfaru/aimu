@@ -92,12 +92,14 @@ export interface Config {
     footer: Footer;
     homepage: Homepage;
     nav: Nav;
+    servicesCatalog: ServicesCatalog;
     settings: Setting;
   };
   globalsSelect: {
     footer: FooterSelect<false> | FooterSelect<true>;
     homepage: HomepageSelect<false> | HomepageSelect<true>;
     nav: NavSelect<false> | NavSelect<true>;
+    servicesCatalog: ServicesCatalogSelect<false> | ServicesCatalogSelect<true>;
     settings: SettingsSelect<false> | SettingsSelect<true>;
   };
   locale: null;
@@ -1205,6 +1207,20 @@ export interface Nav {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "servicesCatalog".
+ */
+export interface ServicesCatalog {
+  id: string;
+  /**
+   * Select the services to display on the Services page.
+   */
+  services?: (string | Service)[] | null;
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "settings".
  */
 export interface Setting {
@@ -1417,6 +1433,17 @@ export interface NavSelect<T extends boolean = true> {
         url?: T;
         id?: T;
       };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "servicesCatalog_select".
+ */
+export interface ServicesCatalogSelect<T extends boolean = true> {
+  services?: T;
   _status?: T;
   updatedAt?: T;
   createdAt?: T;

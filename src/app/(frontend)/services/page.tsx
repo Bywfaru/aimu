@@ -1,7 +1,9 @@
+import { RefreshRouteOnSave } from '@/components';
 import { PageTitleSection, Spacer } from '@/components/pageComponents';
 import { ServicesCardsList } from '@/components/pageComponents/servicesPage/ServicesCardsList';
 import config from '@payload-config';
 import type { Metadata } from 'next';
+import { draftMode } from 'next/headers';
 import { getPayload } from 'payload';
 import { type FC } from 'react';
 
@@ -13,27 +15,41 @@ export const metadata: Metadata = {
 
 const ServicesPage: FC = async () => {
   const payload = await getPayload({ config });
-  const services = await payload
-    .find({
-      collection: 'services',
-      where: {
-        _status: { equals: 'published' },
-      },
-    })
-    .then((result) => result.docs);
+  const { isEnabled: isDraftModeEnabled } = await draftMode();
+  const servicesCatalog = await payload.findGlobal({
+    slug: 'servicesCatalog',
+    draft: isDraftModeEnabled,
+  });
+  const services = await Promise.all(
+    servicesCatalog?.services?.map(async (service) => {
+      if (typeof service === 'string') {
+        return await payload.findByID({
+          collection: 'services',
+          id: service,
+          draft: isDraftModeEnabled,
+        });
+      }
+
+      return service;
+    }) ?? [],
+  );
 
   return (
-    <main>
-      <PageTitleSection
-        title="Services & Treatments"
-        backgroundImage="/images/pexels-kpaukshtite-3242264.jpg"
-      />
-      <Spacer mobileHeight={40} tabletHeight={80} />
+    <>
+      <RefreshRouteOnSave />
 
-      <ServicesCardsList services={services} />
+      <main>
+        <PageTitleSection
+          title="Services & Treatments"
+          backgroundImage="/images/pexels-kpaukshtite-3242264.jpg"
+        />
+        <Spacer mobileHeight={40} tabletHeight={80} />
 
-      <Spacer mobileHeight={40} tabletHeight={80} />
-    </main>
+        <ServicesCardsList services={services} />
+
+        <Spacer mobileHeight={40} tabletHeight={80} />
+      </main>
+    </>
   );
 };
 
