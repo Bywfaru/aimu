@@ -5,7 +5,7 @@ import { draftMode } from 'next/headers';
 import { getPayload } from 'payload';
 import type { FC } from 'react';
 
-export const revalidate = 3600;
+export const revalidate = 86400; // 24 hours;
 
 const HomePage: FC = async () => {
   const payload = await getPayload({ config });
