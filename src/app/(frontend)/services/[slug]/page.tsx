@@ -170,7 +170,10 @@ const ServicesPage: FC<PageProps> = async ({ params }) => {
 
         {!!service.description && (
           <>
-            <RichText data={service.description} />
+            <RichText
+              data={service.description}
+              className={clsx(['px-5', 'lg:px-0'])}
+            />
 
             <Spacer mobileHeight={40} tabletHeight={80} />
           </>

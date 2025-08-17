@@ -18,8 +18,6 @@ export const RichText: FC<RichTextProps> = ({ className, ...restProps }) => {
         'w-full',
         'max-w-5xl',
         'mx-auto',
-        'px-5',
-        'lg:px-0',
         '[&_h2]:text-3xl',
         '[&_h2]:md:text-5xl',
         '[&_h2]:text-primary-3',
