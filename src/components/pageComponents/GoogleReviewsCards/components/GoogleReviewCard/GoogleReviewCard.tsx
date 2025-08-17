@@ -1,7 +1,11 @@
+'use client';
+
 import { BackgroundImage } from '@/components';
+import { useGSAP } from '@gsap/react';
 import clsx from 'clsx';
 import type { places_v1 } from 'googleapis';
-import { type FC } from 'react';
+import gsap from 'gsap';
+import { type FC, useRef } from 'react';
 import { StarRating } from './components';
 
 export type GoogleReviewCardProps = {
@@ -9,8 +13,26 @@ export type GoogleReviewCardProps = {
 };
 
 export const GoogleReviewCard: FC<GoogleReviewCardProps> = ({ review }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      gsap.to(containerRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top bottom',
+        },
+      });
+    },
+    { scope: containerRef },
+  );
+
   return (
     <div
+      ref={containerRef}
       className={clsx([
         'flex',
         'flex-col',
@@ -20,6 +42,8 @@ export const GoogleReviewCard: FC<GoogleReviewCardProps> = ({ review }) => {
         'border',
         'border-accent-2',
         'h-fit',
+        'opacity-0',
+        'translate-y-1/12',
       ])}
     >
       <div

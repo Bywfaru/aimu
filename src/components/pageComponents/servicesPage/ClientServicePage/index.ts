@@ -1,2 +1,1 @@
-export * from './ServicesCardsList';
 export * from './ClientServicePage';

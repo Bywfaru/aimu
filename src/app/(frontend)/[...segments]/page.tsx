@@ -1,4 +1,4 @@
-import { Blocks, RefreshRouteOnSave } from '@/components';
+import { Blocks, RefreshRouteOnSave, RegisterGSAP } from '@/components';
 import { getGooglePlaceData } from '@/lib/utils';
 import config from '@payload-config';
 import type { Metadata } from 'next';
@@ -110,6 +110,7 @@ const DynamicPage: FC<PageProps> = async ({ params }) => {
   return (
     <>
       <RefreshRouteOnSave />
+      <RegisterGSAP />
 
       <main>
         <Blocks

@@ -1,11 +1,8 @@
-import { BackgroundImage, RefreshRouteOnSave, RichText } from '@/components';
-import { Spacer } from '@/components/pageComponents';
+import { RefreshRouteOnSave, RegisterGSAP } from '@/components';
+import { ClientServicePage } from '@/components/pageComponents/servicesPage/ClientServicePage/ClientServicePage';
 import config from '@payload-config';
-import clsx from 'clsx';
-import { ChevronLeft } from 'lucide-react';
 import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getPayload } from 'payload';
 import { type FC } from 'react';
@@ -60,7 +57,7 @@ export const generateStaticParams = async () => {
   });
 };
 
-const ServicesPage: FC<PageProps> = async ({ params }) => {
+const ServicePage: FC<PageProps> = async ({ params }) => {
   const { slug } = await params;
   const payload = await getPayload({ config });
   const { isEnabled: isDraftModeEnabled } = await draftMode();
@@ -80,107 +77,18 @@ const ServicesPage: FC<PageProps> = async ({ params }) => {
     draft: isDraftModeEnabled,
   });
   const [service] = services.docs;
-  const media = service.media?.[0];
-  const backgroundImage = media
-    ? typeof media.item === 'string'
-      ? media.item
-      : (media.item.url ?? '')
-    : '';
 
-  if (service._status !== 'published' && !isDraftModeEnabled) notFound();
+  if (!service || (service._status !== 'published' && !isDraftModeEnabled))
+    notFound();
 
   return (
     <>
       <RefreshRouteOnSave />
+      <RegisterGSAP />
 
-      <main>
-        <Spacer mobileHeight={20} />
-
-        <div
-          className={clsx([
-            'gap-2',
-            'text-primary-3',
-            'max-w-5xl',
-            'mx-auto',
-            'px-5',
-            'lg:px-0',
-            '',
-          ])}
-        >
-          <p>
-            <Link
-              href="/services"
-              className={clsx(['hover:underline', 'gap-1', 'lg:pl-0'])}
-            >
-              <ChevronLeft
-                size={16}
-                className={clsx(['inline-block', 'mb-1'])}
-              />{' '}
-              Services
-            </Link>{' '}
-            / {service.title}
-          </p>
-        </div>
-
-        <Spacer mobileHeight={20} desktopHeight={40} />
-
-        <div className={clsx(['w-full', 'max-w-5xl', 'mx-auto'])}>
-          <h1
-            className={clsx([
-              'px-5',
-              'text-5xl',
-              'text-primary-3',
-              'w-fit',
-              'md:text-7xl',
-              'lg:px-0',
-            ])}
-          >
-            {service.title}
-          </h1>
-
-          <p
-            className={clsx([
-              'w-full',
-              'px-5',
-              'lg:px-0',
-              'max-w-5xl',
-              'mx-auto',
-            ])}
-          >
-            {service.summary}
-          </p>
-        </div>
-
-        <Spacer mobileHeight={20} />
-
-        <div
-          className={clsx([
-            'w-full',
-            'max-w-5xl',
-            'mx-auto',
-            'relative',
-            'h-75',
-            'lg:h-100',
-          ])}
-        >
-          <BackgroundImage src={backgroundImage} />
-        </div>
-
-        <Spacer mobileHeight={20} />
-
-        {!!service.description && (
-          <>
-            <RichText
-              data={service.description}
-              className={clsx(['px-5', 'lg:px-0'])}
-            />
-
-            <Spacer mobileHeight={40} tabletHeight={80} />
-          </>
-        )}
-      </main>
+      <ClientServicePage service={service} />
     </>
   );
 };
 
-export default ServicesPage;
+export default ServicePage;

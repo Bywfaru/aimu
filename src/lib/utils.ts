@@ -7,6 +7,8 @@ export const cn = (...inputs: ClassValue[]) => {
 };
 
 export const getGooglePlaceData = async () => {
+  if (process.env.NODE_ENV !== 'production') return { reviews: [] };
+
   const places = google.places({
     version: 'v1',
     auth: process.env.GOOGLE_PLACES_API_KEY,

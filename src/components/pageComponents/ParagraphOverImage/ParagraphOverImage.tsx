@@ -1,8 +1,12 @@
+'use client';
+
 import { BackgroundImage, RichText, type RichTextProps } from '@/components';
 import { useMedia } from '@/hooks';
 import type { Media } from '@/payload-types';
+import { useGSAP } from '@gsap/react';
 import clsx from 'clsx';
-import { type FC } from 'react';
+import gsap from 'gsap';
+import { type FC, useRef } from 'react';
 
 export type ParagraphOverImageProps = {
   title?: RichTextProps['data'] | null;
@@ -19,10 +23,40 @@ export const ParagraphOverImage: FC<ParagraphOverImageProps> = ({
   contentBackgroundColor,
   textAlign,
 }) => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const backgroundRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
   const backgroundImageUrl = useMedia(image);
 
+  useGSAP(
+    () => {
+      gsap.defaults({
+        duration: 0.5,
+      });
+
+      gsap.to(backgroundRef.current, {
+        scale: 1,
+        opacity: 1,
+        duration: 1,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+        },
+      });
+
+      gsap.to(contentRef.current, {
+        y: 0,
+        opacity: 1,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+        },
+      });
+    },
+    { scope: sectionRef },
+  );
+
   return (
-    <section className="w-full">
+    <section ref={sectionRef} className={clsx(['w-full', 'overflow-hidden'])}>
       <div
         className={clsx([
           'w-full',
@@ -33,10 +67,17 @@ export const ParagraphOverImage: FC<ParagraphOverImageProps> = ({
           'md:py-20',
         ])}
       >
-        <BackgroundImage src={backgroundImageUrl} />
+        <BackgroundImage
+          ref={backgroundRef}
+          src={backgroundImageUrl}
+          containerClassName={clsx(['scale-125', 'opacity-0'])}
+        />
 
         <div
+          ref={contentRef}
           className={clsx([
+            'opacity-0',
+            'translate-y-1/12',
             'size-full',
             'flex',
             'flex-col',

@@ -55,5 +55,11 @@ export const BookingWidget: FC = () => {
     };
   }, []);
 
-  return <div id="sbw_x5acz3" ref={widgetContainerRef}></div>;
+  return (
+    <div
+      id="sbw_x5acz3"
+      ref={widgetContainerRef}
+      className="min-h-screen"
+    ></div>
+  );
 };

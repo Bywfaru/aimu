@@ -1,4 +1,4 @@
-import { Blocks, RefreshRouteOnSave } from '@/components';
+import { Blocks, RefreshRouteOnSave, RegisterGSAP } from '@/components';
 import { getGooglePlaceData } from '@/lib/utils';
 import config from '@payload-config';
 import { draftMode } from 'next/headers';
@@ -37,6 +37,7 @@ const HomePage: FC = async () => {
   return (
     <>
       <RefreshRouteOnSave />
+      <RegisterGSAP />
 
       <main>
         <Blocks

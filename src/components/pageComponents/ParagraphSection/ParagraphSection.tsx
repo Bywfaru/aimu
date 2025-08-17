@@ -1,9 +1,11 @@
 'use client';
 
 import { Button, RichText, type RichTextProps } from '@/components';
+import { useGSAP } from '@gsap/react';
 import clsx from 'clsx';
+import gsap from 'gsap';
 import Link from 'next/link';
-import type { FC } from 'react';
+import { type FC, useRef } from 'react';
 
 export type ParagraphSectionProps = {
   title?: RichTextProps['data'] | null;
@@ -28,8 +30,40 @@ export const ParagraphSection: FC<ParagraphSectionProps> = ({
   button,
   contentColor,
 }) => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      gsap.defaults({
+        duration: 0.5,
+      });
+
+      gsap.to(titleRef.current, {
+        opacity: 1,
+        y: 0,
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: 'top bottom',
+        },
+      });
+
+      gsap.to(contentRef.current, {
+        opacity: 1,
+        y: 0,
+        scrollTrigger: {
+          trigger: contentRef.current,
+          start: 'top bottom',
+        },
+      });
+    },
+    { scope: sectionRef },
+  );
+
   return (
     <section
+      ref={sectionRef}
       className="px-5"
       style={{ backgroundColor: backgroundColor ?? undefined }}
     >
@@ -48,13 +82,29 @@ export const ParagraphSection: FC<ParagraphSectionProps> = ({
         ])}
       >
         {!!title && (
-          <h2 className={clsx(['text-4xl', 'text-primary-3', 'text-center'])}>
+          <h2
+            ref={titleRef}
+            className={clsx([
+              'text-4xl',
+              'text-primary-3',
+              'text-center',
+              'opacity-0',
+            ])}
+          >
             <RichText data={title} />
           </h2>
         )}
 
         <div
-          className={clsx(['flex', 'flex-col', 'items-center', 'gap-5'])}
+          ref={contentRef}
+          className={clsx([
+            'flex',
+            'flex-col',
+            'items-center',
+            'gap-5',
+            'opacity-0',
+            'translate-y-1/12',
+          ])}
           style={{ color: contentColor ?? undefined }}
         >
           {!!content && (

@@ -1,4 +1,4 @@
-import { RefreshRouteOnSave } from '@/components';
+import { RefreshRouteOnSave, RegisterGSAP } from '@/components';
 import { PageTitleSection, Spacer } from '@/components/pageComponents';
 import { ServicesCardsList } from '@/components/pageComponents/servicesPage/ServicesCardsList';
 import config from '@payload-config';
@@ -37,6 +37,7 @@ const ServicesPage: FC = async () => {
   return (
     <>
       <RefreshRouteOnSave />
+      <RegisterGSAP />
 
       <main>
         <PageTitleSection

@@ -1,8 +1,13 @@
+'use client';
+
 import { BackgroundImage, RichText, type RichTextProps } from '@/components';
 import { useMedia } from '@/hooks';
 import type { Media } from '@/payload-types';
+import { useGSAP } from '@gsap/react';
 import clsx from 'clsx';
+import gsap from 'gsap';
 import type { FC } from 'react';
+import { useRef } from 'react';
 
 export type ParagraphImageSectionProps = {
   title?: RichTextProps['data'] | null;
@@ -19,10 +24,54 @@ export const ParagraphImageSection: FC<ParagraphImageSectionProps> = ({
   title,
   reverse = false,
 }) => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const backgroundRef = useRef<HTMLDivElement>(null);
+
   const imageUrl = useMedia(image);
+
+  useGSAP(
+    () => {
+      gsap.defaults({
+        duration: 0.5,
+      });
+
+      gsap.to(titleRef.current, {
+        x: 0,
+        y: 0,
+        opacity: 1,
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: 'top bottom',
+        },
+      });
+
+      gsap.to(contentRef.current, {
+        x: 0,
+        y: 0,
+        opacity: 1,
+        scrollTrigger: {
+          trigger: contentRef.current,
+          start: 'top bottom',
+        },
+      });
+
+      gsap.to(backgroundRef.current, {
+        x: 0,
+        opacity: 1,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'bottom bottom',
+        },
+      });
+    },
+    { scope: sectionRef },
+  );
 
   return (
     <section
+      ref={sectionRef}
       className={clsx([
         'w-full',
         'flex',
@@ -57,13 +106,34 @@ export const ParagraphImageSection: FC<ParagraphImageSectionProps> = ({
           ])}
         >
           {!!title && (
-            <h2 className={clsx(['text-4xl', 'text-primary-3'])}>
+            <h2
+              ref={titleRef}
+              className={clsx([
+                'text-4xl',
+                'text-primary-3',
+                'translate-y-1/12',
+                'opacity-0',
+                'md:translate-y-0',
+                'md:-translate-x-1/12',
+                'transition-all',
+              ])}
+            >
               <RichText data={title} />
             </h2>
           )}
 
           {!!content && (
-            <div className="text-justify">
+            <div
+              ref={contentRef}
+              className={clsx([
+                'text-justify',
+                'translate-y-1/12',
+                'opacity-0',
+                'md:translate-y-0',
+                'md:-translate-x-1/12',
+                'transition-all',
+              ])}
+            >
               <RichText data={content} />
             </div>
           )}
@@ -79,7 +149,15 @@ export const ParagraphImageSection: FC<ParagraphImageSectionProps> = ({
           'md:h-auto',
         ])}
       >
-        <BackgroundImage src={imageUrl} zIndex={0} />
+        <BackgroundImage
+          ref={backgroundRef}
+          src={imageUrl}
+          zIndex={0}
+          containerClassName={clsx([
+            'opacity-0',
+            reverse ? 'md:-translate-x-1/12' : 'md:translate-x-1/12',
+          ])}
+        />
       </div>
     </section>
   );

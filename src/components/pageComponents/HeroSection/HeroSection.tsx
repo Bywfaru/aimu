@@ -8,9 +8,11 @@ import {
 } from '@/components';
 import { useMedia } from '@/hooks';
 import type { Media } from '@/payload-types';
+import { useGSAP } from '@gsap/react';
 import clsx from 'clsx';
+import gsap from 'gsap';
 import Link from 'next/link';
-import { type FC } from 'react';
+import { type FC, useRef } from 'react';
 
 export type HeroSectionProps = {
   backgroundImage: string | Media;
@@ -33,11 +35,43 @@ export const HeroSection: FC<HeroSectionProps> = ({
   contentBackgroundColor,
   button,
 }) => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const backgroundRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
   const backgroundImageUrl = useMedia(backgroundImage);
+
+  useGSAP(
+    () => {
+      gsap.defaults({
+        duration: 0.5,
+      });
+
+      gsap.to(backgroundRef.current, {
+        scale: 1,
+        opacity: 1,
+        duration: 1,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+        },
+      });
+
+      gsap.to(contentRef.current, {
+        translateY: 0,
+        opacity: 1,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+        },
+      });
+    },
+    { scope: sectionRef },
+  );
 
   return (
     <section
+      ref={sectionRef}
       className={clsx([
+        'overflow-hidden',
         'w-full',
         'min-h-[calc(100vh-100px)]',
         'relative',
@@ -48,11 +82,19 @@ export const HeroSection: FC<HeroSectionProps> = ({
         'md:min-h-[calc(80vh-150px)]',
       ])}
     >
-      <BackgroundImage src={backgroundImageUrl} loading="eager" />
+      <BackgroundImage
+        ref={backgroundRef}
+        src={backgroundImageUrl}
+        containerClassName={clsx(['scale-125', 'opacity-0'])}
+        loading="eager"
+      />
 
       <div className={clsx(['w-full', 'max-w-5xl', 'mx-auto'])}>
         <div
+          ref={contentRef}
           className={clsx([
+            'opacity-0',
+            'translate-y-1/12',
             'px-5',
             'py-10',
             'flex',

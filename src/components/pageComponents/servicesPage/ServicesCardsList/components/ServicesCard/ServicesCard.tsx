@@ -1,18 +1,40 @@
+'use client';
+
 import { BackgroundImage, Button } from '@/components';
 import type { Service } from '@/payload-types';
+import { useGSAP } from '@gsap/react';
 import clsx from 'clsx';
+import gsap from 'gsap';
 import Link from 'next/link';
-import type { FC } from 'react';
+import { type FC, useRef } from 'react';
 
 export type ServicesCardProps = {
   service: Service;
 };
 
 export const ServicesCard: FC<ServicesCardProps> = ({ service }) => {
+  const linkRef = useRef<HTMLAnchorElement>(null);
+
   const media = service.media?.[0];
+
+  useGSAP(
+    () => {
+      gsap.to(linkRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        scrollTrigger: {
+          trigger: linkRef.current,
+          start: 'top bottom',
+        },
+      });
+    },
+    { scope: linkRef },
+  );
 
   return (
     <Link
+      ref={linkRef}
       href={`/services${service.slug}`}
       key={service.id}
       className={clsx([
@@ -23,6 +45,8 @@ export const ServicesCard: FC<ServicesCardProps> = ({ service }) => {
         'hover:scale-101',
         'hover:shadow-lg',
         'lg:flex-row-reverse',
+        'opacity-0',
+        'translate-y-1/12',
       ])}
     >
       <div

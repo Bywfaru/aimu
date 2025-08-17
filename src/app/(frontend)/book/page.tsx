@@ -1,3 +1,4 @@
+import { RegisterGSAP } from '@/components';
 import { BookingWidget, PageTitleSection } from '@/components/pageComponents';
 import type { Metadata } from 'next';
 import { type FC } from 'react';
@@ -9,14 +10,18 @@ export const metadata: Metadata = {
 
 const BookPage: FC = () => {
   return (
-    <main>
-      <PageTitleSection
-        title="Book a Service"
-        backgroundImage="/images/pexels-kpaukshtite-3242264.jpg"
-      />
+    <>
+      <RegisterGSAP />
 
-      <BookingWidget />
-    </main>
+      <main>
+        <PageTitleSection
+          title="Book a Service"
+          backgroundImage="/images/pexels-kpaukshtite-3242264.jpg"
+        />
+
+        <BookingWidget />
+      </main>
+    </>
   );
 };
 

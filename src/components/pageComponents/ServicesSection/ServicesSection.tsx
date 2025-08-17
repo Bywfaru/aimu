@@ -3,9 +3,11 @@
 import { Button, RichText, type RichTextProps } from '@/components';
 import { ServicesSectionItem } from '@/components/pageComponents/ServicesSection/components';
 import { Service } from '@/payload-types';
+import { useGSAP } from '@gsap/react';
 import clsx from 'clsx';
+import gsap from 'gsap';
 import Link from 'next/link';
-import type { FC } from 'react';
+import { type FC, useRef } from 'react';
 
 export type ServicesSectionProps = {
   title?: RichTextProps['data'] | null;
@@ -18,8 +20,39 @@ export const ServicesSection: FC<ServicesSectionProps> = ({
   title,
   content,
 }) => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      gsap.defaults({
+        duration: 0.5,
+      });
+
+      gsap.to(titleRef.current, {
+        y: 0,
+        opacity: 1,
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: 'top bottom',
+        },
+      });
+
+      gsap.to(contentRef.current, {
+        y: 0,
+        opacity: 1,
+        scrollTrigger: {
+          trigger: contentRef.current,
+          start: 'top bottom',
+        },
+      });
+    },
+    { scope: sectionRef },
+  );
+
   return (
-    <section className="w-full">
+    <section ref={sectionRef} className="w-full">
       <div
         className={clsx([
           'w-full',
@@ -44,17 +77,29 @@ export const ServicesSection: FC<ServicesSectionProps> = ({
           <div className={clsx(['flex', 'flex-col', 'gap-3'])}>
             {!!title && (
               <h2
-                className={clsx(['text-4xl', 'text-primary-3', 'text-center'])}
+                ref={titleRef}
+                className={clsx([
+                  'text-4xl',
+                  'text-primary-3',
+                  'text-center',
+                  'translate-y-1/12',
+                  'opacity-0',
+                ])}
               >
                 <RichText data={title} />
               </h2>
             )}
 
             {!!content && (
-              <RichText
-                data={content}
-                className={clsx(['flex', 'flex-col', 'gap-3'])}
-              />
+              <div
+                ref={contentRef}
+                className={clsx(['w-full', 'opacity-0', 'translate-y-1/12'])}
+              >
+                <RichText
+                  data={content}
+                  className={clsx(['text-xl', 'text-center'])}
+                />
+              </div>
             )}
           </div>
         </div>

@@ -1,22 +1,47 @@
+'use client';
+
 import { BackgroundImage, Button } from '@/components';
 import { useMedia } from '@/hooks';
 import type { Service } from '@/payload-types';
+import { useGSAP } from '@gsap/react';
 import clsx from 'clsx';
+import gsap from 'gsap';
 import Link from 'next/link';
-import type { FC } from 'react';
+import { type FC, useRef } from 'react';
 
 export type ServicesSectionItemProps = {
   service: Service;
+  linkClassName?: string;
 };
 
 export const ServicesSectionItem: FC<ServicesSectionItemProps> = ({
+  linkClassName,
   service,
 }) => {
+  const linkRef = useRef<HTMLAnchorElement>(null);
   const media = service.media?.[0];
   const backgroundImageUrl = useMedia(media?.item);
 
+  useGSAP(
+    () => {
+      gsap.to(linkRef.current, {
+        opacity: 1,
+        duration: 0.5,
+        scrollTrigger: {
+          trigger: linkRef.current,
+          start: 'top bottom',
+        },
+      });
+    },
+    { scope: linkRef },
+  );
+
   return (
-    <Link href={`/services${service.slug}`} className={clsx(['group'])}>
+    <Link
+      ref={linkRef}
+      href={`/services${service.slug}`}
+      className={clsx(['group', 'opacity-0', linkClassName])}
+    >
       <div
         className={clsx([
           'flex',

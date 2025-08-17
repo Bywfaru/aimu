@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import Image, { type ImageProps } from 'next/image';
-import type { FC } from 'react';
+import { forwardRef } from 'react';
 
 export type BackgroundImageProps = {
   src: ImageProps['src'];
@@ -17,43 +17,51 @@ export type BackgroundImageProps = {
   containerClassName?: string;
 };
 
-export const BackgroundImage: FC<BackgroundImageProps> = ({
-  containerClassName,
-  imageClassName,
-  placeholder,
-  src,
-  alt = '',
-  loading = 'lazy',
-  objectFit = 'cover',
-  objectPosition = 'center',
-  quality = 95,
-  zIndex = -1,
-}) => {
-  return (
-    <div
-      className={clsx([
-        'size-full',
-        'absolute',
-        'top-0',
-        'left-0',
-        'overflow-hidden',
-        containerClassName,
-      ])}
-      style={{ zIndex }}
-    >
-      <Image
-        src={src}
-        alt={alt}
-        quality={quality}
-        placeholder={placeholder}
-        style={{
-          objectFit,
-          objectPosition,
-        }}
-        loading={loading}
-        className={imageClassName}
-        fill
-      />
-    </div>
-  );
-};
+export const BackgroundImage = forwardRef<HTMLDivElement, BackgroundImageProps>(
+  (
+    {
+      containerClassName,
+      imageClassName,
+      placeholder,
+      src,
+      alt = '',
+      loading = 'lazy',
+      objectFit = 'cover',
+      objectPosition = 'center',
+      quality = 95,
+      zIndex = -1,
+    },
+    ref,
+  ) => {
+    return (
+      <div
+        ref={ref}
+        className={clsx([
+          'size-full',
+          'absolute',
+          'top-0',
+          'left-0',
+          'overflow-hidden',
+          containerClassName,
+        ])}
+        style={{ zIndex }}
+      >
+        <Image
+          src={src}
+          alt={alt}
+          quality={quality}
+          placeholder={placeholder}
+          style={{
+            objectFit,
+            objectPosition,
+          }}
+          loading={loading}
+          className={imageClassName}
+          fill
+        />
+      </div>
+    );
+  },
+);
+
+BackgroundImage.displayName = 'BackgroundImage';

@@ -6,3 +6,4 @@ export * from './CarouselNavigationButton';
 export * from './RichText';
 export * from './Blocks';
 export * from './RefreshRouteOnSave';
+export * from './RegisterGSAP';

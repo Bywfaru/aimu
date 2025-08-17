@@ -5,9 +5,11 @@ import {
   RichText,
   type RichTextProps,
 } from '@/components';
+import { useGSAP } from '@gsap/react';
 import clsx from 'clsx';
 import { type places_v1 } from 'googleapis';
-import { type FC, useState } from 'react';
+import gsap from 'gsap';
+import { type FC, useRef, useState } from 'react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, type SwiperProps, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -26,16 +28,34 @@ export const GoogleReviewsCarousel: FC<GoogleReviewsCarouselProps> = ({
   content,
   reviews = [],
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleSlideChange: SwiperProps['onSlideChange'] = (swiper) => {
     setCurrentIndex(swiper.activeIndex);
   };
 
+  useGSAP(
+    () => {
+      gsap.to(containerRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top bottom',
+        },
+      });
+    },
+    { scope: containerRef },
+  );
+
   if (!reviews.length) return <p>No reviews to show.</p>;
 
   return (
     <div
+      ref={containerRef}
       className={clsx([
         'w-full',
         'max-w-5xl',
@@ -43,6 +63,8 @@ export const GoogleReviewsCarousel: FC<GoogleReviewsCarouselProps> = ({
         'flex',
         'flex-col',
         'gap-5',
+        'opacity-0',
+        'translate-y-1/12',
       ])}
     >
       <div
