@@ -31,15 +31,16 @@ export const ClientServicePage: FC<ServicesPageProps> = ({ service }) => {
       const timeline = gsap.timeline({
         defaults: {
           duration: 0.5,
+          delay: -0.25,
         },
       });
 
       timeline
         .to(breadcrumbRef.current, { opacity: 1, x: 0 })
-        .to(titleRef.current, { opacity: 1, x: 0 }, '-=0.25')
-        .to(summaryRef.current, { opacity: 1, x: 0 }, '-=0.25')
-        .to(imageRef.current, { opacity: 1, scale: 1, duration: 1 }, '-=0.25')
-        .to(descriptionRef.current, { opacity: 1, x: 0 }, '-=0.25');
+        .to(titleRef.current, { opacity: 1, x: 0 })
+        .to(summaryRef.current, { opacity: 1, x: 0 })
+        .to(imageRef.current, { opacity: 1, scale: 1, duration: 1 })
+        .to(descriptionRef.current, { opacity: 1, x: 0, delay: -0.75 });
     },
     { scope: mainRef },
   );
