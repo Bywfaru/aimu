@@ -32,7 +32,7 @@ export const Pages: CollectionConfig = {
         url.searchParams.set('collection', 'pages');
         url.searchParams.set(
           'slug',
-          data.slug.startsWith('/') ? data.slug : `/${data.slug}`,
+          data?.slug?.startsWith('/') ? data.slug : `/${data.slug}`,
         );
 
         return url.toString();

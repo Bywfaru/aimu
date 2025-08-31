@@ -29,7 +29,7 @@ export const generateStaticParams = async () => {
   });
 
   return pages.docs.map((doc) => {
-    const slug = doc.slug.startsWith('/') ? doc.slug.slice(1) : doc.slug;
+    const slug = doc?.slug?.startsWith('/') ? doc.slug.slice(1) : doc.slug;
 
     return {
       segments: slug.split('/'),
