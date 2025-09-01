@@ -18,10 +18,13 @@ export const Services: CollectionConfig = {
 
         url.pathname = '/api/draft';
         url.searchParams.set('secret', process.env.PAYLOAD_SECRET);
+
+        if (!data?.slug) return url.toString();
+
         url.searchParams.set('collection', 'services');
         url.searchParams.set(
           'slug',
-          data?.slug?.startsWith('/') ? data.slug : `/${data.slug}`,
+          data.slug.startsWith('/') ? data.slug : `/${data.slug}`,
         );
 
         return url.toString();

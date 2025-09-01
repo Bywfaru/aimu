@@ -26,15 +26,19 @@ export const generateStaticParams = async () => {
       title: true,
       description: true,
     },
+    draft: false,
   });
 
-  return pages.docs.map((doc) => {
-    const slug = doc?.slug?.startsWith('/') ? doc.slug.slice(1) : doc.slug;
+  return pages.docs.reduce(
+    (prev, page) => {
+      if (!page?.slug) return prev;
 
-    return {
-      segments: slug.split('/'),
-    };
-  });
+      const slug = page.slug.startsWith('/') ? page.slug.slice(1) : page.slug;
+
+      return [...prev, { segments: slug.split('/') }];
+    },
+    [] as { segments: string[] }[],
+  );
 };
 
 export const generateMetadata = async ({
