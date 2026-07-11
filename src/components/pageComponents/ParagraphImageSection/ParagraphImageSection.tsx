@@ -33,10 +33,6 @@ export const ParagraphImageSection: FC<ParagraphImageSectionProps> = ({
 
   useGSAP(
     () => {
-      gsap.defaults({
-        duration: 0.5,
-      });
-
       gsap.to(titleRef.current, {
         x: 0,
         y: 0,
@@ -44,6 +40,7 @@ export const ParagraphImageSection: FC<ParagraphImageSectionProps> = ({
         scrollTrigger: {
           trigger: titleRef.current,
           start: 'top bottom',
+          once: true,
         },
       });
 
@@ -54,6 +51,7 @@ export const ParagraphImageSection: FC<ParagraphImageSectionProps> = ({
         scrollTrigger: {
           trigger: contentRef.current,
           start: 'top bottom',
+          once: true,
         },
       });
 
@@ -63,6 +61,7 @@ export const ParagraphImageSection: FC<ParagraphImageSectionProps> = ({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'bottom bottom',
+          once: true,
         },
       });
     },
@@ -157,6 +156,7 @@ export const ParagraphImageSection: FC<ParagraphImageSectionProps> = ({
             'opacity-0',
             reverse ? 'md:-translate-x-1/12' : 'md:translate-x-1/12',
           ])}
+          sizes="(min-width: 768px) 50vw, 100vw"
         />
       </div>
     </section>

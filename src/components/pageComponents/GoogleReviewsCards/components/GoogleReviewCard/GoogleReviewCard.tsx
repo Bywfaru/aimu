@@ -24,6 +24,7 @@ export const GoogleReviewCard: FC<GoogleReviewCardProps> = ({ review }) => {
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top bottom',
+          once: true,
         },
       });
     },
@@ -58,7 +59,10 @@ export const GoogleReviewCard: FC<GoogleReviewCardProps> = ({ review }) => {
         ])}
       >
         <div className={clsx(['relative', 'size-10'])}>
-          <BackgroundImage src={review.authorAttribution?.photoUri ?? ''} />
+          <BackgroundImage
+            src={review.authorAttribution?.photoUri ?? ''}
+            sizes="40px"
+          />
         </div>
 
         <div>

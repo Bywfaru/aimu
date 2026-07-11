@@ -4,9 +4,6 @@ import { RichText, type RichTextProps } from '@/components';
 import clsx from 'clsx';
 import { type places_v1 } from 'googleapis';
 import { type FC, useMemo } from 'react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 import { GoogleReviewCard } from './components';
 
 export type GoogleReviewsCardsProps = {

@@ -30,6 +30,7 @@ export const ServicesSectionItem: FC<ServicesSectionItemProps> = ({
         scrollTrigger: {
           trigger: linkRef.current,
           start: 'top bottom',
+          once: true,
         },
       });
     },
@@ -57,6 +58,7 @@ export const ServicesSectionItem: FC<ServicesSectionItemProps> = ({
         <BackgroundImage
           src={backgroundImageUrl}
           imageClassName={clsx(['group-hover:scale-105', 'transition'])}
+          sizes="(min-width: 768px) 50vw, 100vw"
         />
 
         <div

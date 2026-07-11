@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { getPayload } from 'payload';
-import type { FC } from 'react';
+import { cache, type FC } from 'react';
 
 export const revalidate = 86400; // 24 hours;
 
@@ -14,6 +14,25 @@ type PageProps = {
     segments: string[];
   }>;
 };
+
+const getPageBySlug = cache(async (slug: string, draft: boolean) => {
+  const payload = await getPayload({ config });
+
+  return payload.find({
+    collection: 'pages',
+    where: {
+      slug: { equals: slug.startsWith('/') ? slug : `/${slug}` },
+    },
+    limit: 1,
+    select: {
+      title: true,
+      description: true,
+      blocks: true,
+      _status: true,
+    },
+    draft,
+  });
+});
 
 export const dynamicParams = true;
 
@@ -45,19 +64,9 @@ export const generateMetadata = async ({
   params,
 }: PageProps): Promise<Metadata> => {
   const { segments } = await params;
-  const payload = await getPayload({ config });
   const slug = segments.length === 1 ? segments[0] : `/${segments.join('/')}`;
-  const pages = await payload.find({
-    collection: 'pages',
-    where: {
-      slug: { equals: slug.startsWith('/') ? slug : `/${slug}` },
-    },
-    limit: 10,
-    select: {
-      title: true,
-      description: true,
-    },
-  });
+  const { isEnabled: isDraftModeEnabled } = await draftMode();
+  const pages = await getPageBySlug(slug, isDraftModeEnabled);
   const [page] = pages.docs;
 
   return {
@@ -72,20 +81,7 @@ const DynamicPage: FC<PageProps> = async ({ params }) => {
   const payload = await getPayload({ config });
   const { isEnabled: isDraftModeEnabled } = await draftMode();
   const [pages, servicesCatalog, { reviews }] = await Promise.all([
-    payload.find({
-      collection: 'pages',
-      where: {
-        slug: { equals: slug.startsWith('/') ? slug : `/${slug}` },
-      },
-      limit: 1,
-      select: {
-        title: true,
-        description: true,
-        blocks: true,
-        _status: true,
-      },
-      draft: isDraftModeEnabled,
-    }),
+    getPageBySlug(slug, isDraftModeEnabled),
     payload.findGlobal({
       slug: 'servicesCatalog',
       draft: isDraftModeEnabled,

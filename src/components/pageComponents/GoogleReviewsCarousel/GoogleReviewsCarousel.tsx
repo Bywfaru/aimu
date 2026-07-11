@@ -45,6 +45,7 @@ export const GoogleReviewsCarousel: FC<GoogleReviewsCarouselProps> = ({
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top bottom',
+          once: true,
         },
       });
     },

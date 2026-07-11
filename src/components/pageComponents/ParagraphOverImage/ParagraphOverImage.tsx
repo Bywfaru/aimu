@@ -31,16 +31,13 @@ export const ParagraphOverImage: FC<ParagraphOverImageProps> = ({
 
   useGSAP(
     () => {
-      gsap.defaults({
-        duration: 0.5,
-      });
-
       gsap.to(backgroundRef.current, {
         scale: 1,
         opacity: 1,
         duration: 1,
         scrollTrigger: {
           trigger: sectionRef.current,
+          once: true,
         },
       });
 
@@ -49,6 +46,7 @@ export const ParagraphOverImage: FC<ParagraphOverImageProps> = ({
         opacity: 1,
         scrollTrigger: {
           trigger: sectionRef.current,
+          once: true,
         },
       });
     },
@@ -71,6 +69,7 @@ export const ParagraphOverImage: FC<ParagraphOverImageProps> = ({
           ref={backgroundRef}
           src={backgroundImageUrl}
           containerClassName={clsx(['scale-125', 'opacity-0'])}
+          sizes="(min-width: 1024px) 1024px, 100vw"
         />
 
         <div

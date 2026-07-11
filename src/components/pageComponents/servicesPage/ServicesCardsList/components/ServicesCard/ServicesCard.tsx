@@ -26,6 +26,7 @@ export const ServicesCard: FC<ServicesCardProps> = ({ service }) => {
         scrollTrigger: {
           trigger: linkRef.current,
           start: 'top bottom',
+          once: true,
         },
       });
     },
@@ -65,6 +66,7 @@ export const ServicesCard: FC<ServicesCardProps> = ({ service }) => {
                 ? media.item
                 : (media.item.url ?? '')
             }
+            sizes="(min-width: 1024px) 40vw, 100vw"
           />
         )}
       </div>

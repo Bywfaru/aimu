@@ -26,16 +26,13 @@ export const ServicesSection: FC<ServicesSectionProps> = ({
 
   useGSAP(
     () => {
-      gsap.defaults({
-        duration: 0.5,
-      });
-
       gsap.to(titleRef.current, {
         y: 0,
         opacity: 1,
         scrollTrigger: {
           trigger: titleRef.current,
           start: 'top bottom',
+          once: true,
         },
       });
 
@@ -45,6 +42,7 @@ export const ServicesSection: FC<ServicesSectionProps> = ({
         scrollTrigger: {
           trigger: contentRef.current,
           start: 'top bottom',
+          once: true,
         },
       });
     },

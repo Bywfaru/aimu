@@ -36,16 +36,13 @@ export const ParagraphSection: FC<ParagraphSectionProps> = ({
 
   useGSAP(
     () => {
-      gsap.defaults({
-        duration: 0.5,
-      });
-
       gsap.to(titleRef.current, {
         opacity: 1,
         y: 0,
         scrollTrigger: {
           trigger: titleRef.current,
           start: 'top bottom',
+          once: true,
         },
       });
 
@@ -55,6 +52,7 @@ export const ParagraphSection: FC<ParagraphSectionProps> = ({
         scrollTrigger: {
           trigger: contentRef.current,
           start: 'top bottom',
+          once: true,
         },
       });
     },

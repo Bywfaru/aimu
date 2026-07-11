@@ -43,16 +43,13 @@ export const HeroSection: FC<HeroSectionProps> = ({
 
   useGSAP(
     () => {
-      gsap.defaults({
-        duration: 0.5,
-      });
-
       gsap.to(backgroundRef.current, {
         scale: 1,
         opacity: 1,
         duration: 1,
         scrollTrigger: {
           trigger: sectionRef.current,
+          once: true,
         },
       });
 
@@ -61,6 +58,7 @@ export const HeroSection: FC<HeroSectionProps> = ({
         opacity: 1,
         scrollTrigger: {
           trigger: sectionRef.current,
+          once: true,
         },
       });
     },
@@ -87,6 +85,8 @@ export const HeroSection: FC<HeroSectionProps> = ({
         src={backgroundImageUrl}
         containerClassName={clsx(['scale-125', 'opacity-0'])}
         loading="eager"
+        priority
+        sizes="100vw"
       />
 
       <div className={clsx(['w-full', 'max-w-5xl', 'mx-auto'])}>

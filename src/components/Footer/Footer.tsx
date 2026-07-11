@@ -142,26 +142,28 @@ export const Footer: FC<FooterProps> = ({
                 >
                   <p className={clsx(['font-brolian', 'text-2xl'])}>Socials</p>
 
-                  {!!socialMedia.instagram && (
-                    <a href={socialMedia.instagram}>
-                      <SiInstagram size={24} />
-                    </a>
-                  )}
-                  {!!socialMedia.facebook && (
-                    <a href={socialMedia.facebook}>
-                      <SiFacebook size={24} />
-                    </a>
-                  )}
-                  {!!socialMedia.twitter && (
-                    <a href={socialMedia.twitter}>
-                      <SiX size={24} />
-                    </a>
-                  )}
-                  {!!socialMedia.whatsapp && (
-                    <a href={`tel:${socialMedia.whatsapp}`}>
-                      <SiWhatsapp size={24} />
-                    </a>
-                  )}
+                  <div className={clsx(['flex', 'gap-2'])}>
+                    {!!socialMedia.instagram && (
+                      <a href={socialMedia.instagram}>
+                        <SiInstagram size={24} />
+                      </a>
+                    )}
+                    {!!socialMedia.facebook && (
+                      <a href={socialMedia.facebook}>
+                        <SiFacebook size={24} />
+                      </a>
+                    )}
+                    {!!socialMedia.twitter && (
+                      <a href={socialMedia.twitter}>
+                        <SiX size={24} />
+                      </a>
+                    )}
+                    {!!socialMedia.whatsapp && (
+                      <a href={`tel:${socialMedia.whatsapp}`}>
+                        <SiWhatsapp size={24} />
+                      </a>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
@@ -176,7 +178,7 @@ export const Footer: FC<FooterProps> = ({
           >
             William He
           </a>{' '}
-          @ 2025
+          @ 2026
         </p>
       </div>
     </footer>

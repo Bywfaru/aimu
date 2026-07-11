@@ -8,6 +8,8 @@ export type BackgroundImageProps = {
   src: ImageProps['src'];
   alt?: ImageProps['alt'];
   loading?: ImageProps['loading'];
+  priority?: ImageProps['priority'];
+  sizes?: ImageProps['sizes'];
   objectFit?: Required<ImageProps>['style']['objectFit'];
   objectPosition?: Required<ImageProps>['style']['objectPosition'];
   quality?: ImageProps['quality'];
@@ -26,9 +28,11 @@ export const BackgroundImage = forwardRef<HTMLDivElement, BackgroundImageProps>(
       src,
       alt = '',
       loading = 'lazy',
+      priority = false,
+      sizes = '100vw',
       objectFit = 'cover',
       objectPosition = 'center',
-      quality = 95,
+      quality = 75,
       zIndex = -1,
     },
     ref,
@@ -56,6 +60,8 @@ export const BackgroundImage = forwardRef<HTMLDivElement, BackgroundImageProps>(
             objectPosition,
           }}
           loading={loading}
+          priority={priority}
+          sizes={sizes}
           className={imageClassName}
           fill
         />

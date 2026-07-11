@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { getPayload } from 'payload';
-import { type FC } from 'react';
+import { cache, type FC } from 'react';
 
 export const revalidate = 86400; // 24 hours;
 
@@ -13,19 +13,30 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export const generateMetadata = async ({ params }: PageProps) => {
-  const { slug } = await params;
+const getServiceBySlug = cache(async (slug: string, draft: boolean) => {
   const payload = await getPayload({ config });
-  const services = await payload.find({
+
+  return payload.find({
     collection: 'services',
     where: {
       slug: { equals: slug.startsWith('/') ? slug : `/${slug}` },
     },
-    limit: 1,
     select: {
+      media: true,
       title: true,
+      description: true,
+      summary: true,
+      _status: true,
     },
+    limit: 1,
+    draft,
   });
+});
+
+export const generateMetadata = async ({ params }: PageProps) => {
+  const { slug } = await params;
+  const { isEnabled: isDraftModeEnabled } = await draftMode();
+  const services = await getServiceBySlug(slug, isDraftModeEnabled);
   const [service] = services.docs;
 
   return {
@@ -59,23 +70,8 @@ export const generateStaticParams = async () => {
 
 const ServicePage: FC<PageProps> = async ({ params }) => {
   const { slug } = await params;
-  const payload = await getPayload({ config });
   const { isEnabled: isDraftModeEnabled } = await draftMode();
-  const services = await payload.find({
-    collection: 'services',
-    where: {
-      slug: { equals: slug.startsWith('/') ? slug : `/${slug}` },
-    },
-    select: {
-      media: true,
-      title: true,
-      description: true,
-      summary: true,
-      _status: true,
-    },
-    limit: 1,
-    draft: isDraftModeEnabled,
-  });
+  const services = await getServiceBySlug(slug, isDraftModeEnabled);
   const [service] = services.docs;
 
   if (!service || (service._status !== 'published' && !isDraftModeEnabled))
